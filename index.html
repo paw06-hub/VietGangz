@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GTA Network - Thế giới của bạn</title>
+  <title>VietGangz - Thế giới của bạn</title>
   
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -22,7 +19,7 @@
       --bg-card: #121212;
       --text-main: #ffffff;
       --text-muted: #888888;
-      --accent: #ff2a2a; /* Đỏ GTA */
+      --accent: #ff2a2a;
       --accent-hover: #cc0000;
       --border: #222222;
     }
@@ -35,7 +32,7 @@
       overflow-x: hidden;
     }
     
-    h1, h2, h3, h4, .logo-text {
+    h1, h2, h3, h4, .logo-text, .btn-nav {
       font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -66,6 +63,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
     }
     
     .logo-text span { color: var(--accent); }
@@ -75,31 +73,46 @@
     .nav-links a {
       font-size: 0.85rem;
       font-weight: 700;
-      text-transform: uppercase;
       transition: color 0.3s;
-      letter-spacing: 1px;
     }
     
     .nav-links a:hover { color: var(--accent); }
     
-    .nav-actions { display: flex; gap: 1rem; }
+    .nav-actions { display: flex; gap: 1rem; align-items: center; }
     
     .btn-nav {
       padding: 0.6rem 1.5rem;
       border: 1px solid var(--text-main);
       background: transparent;
       color: var(--text-main);
-      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
       transition: all 0.3s;
-      text-transform: uppercase;
     }
     
     .btn-nav:hover { background: var(--text-main); color: var(--bg); }
     .btn-nav.primary { background: var(--accent); border-color: var(--accent); }
     .btn-nav.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+    /* User Info (Khi đã đăng nhập) */
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .user-name {
+      color: var(--accent);
+      font-weight: 800;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .btn-logout {
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+    .btn-logout:hover { color: var(--accent); }
 
     /* ===== HERO SECTION ===== */
     .hero {
@@ -110,7 +123,6 @@
       align-items: center;
       text-align: center;
       position: relative;
-      /* Ảnh nền mờ phong cách GTA */
       background: linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,0.95)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
       padding: 0 2rem;
     }
@@ -120,7 +132,6 @@
       line-height: 1.1;
       margin-bottom: 1.5rem;
       animation: fadeInUp 1s ease;
-      text-shadow: 0 5px 20px rgba(0,0,0,0.8);
     }
     
     .hero h1 span { color: var(--accent); }
@@ -131,7 +142,6 @@
       color: #cccccc;
       margin-bottom: 3rem;
       animation: fadeInUp 1s ease 0.2s both;
-      font-weight: 300;
     }
     
     .hero-buttons { display: flex; gap: 1.5rem; animation: fadeInUp 1s ease 0.4s both; }
@@ -144,194 +154,145 @@
       cursor: pointer;
       transition: all 0.3s;
       border: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
     }
     
     .btn-large.primary { background: var(--accent); color: white; box-shadow: 0 0 20px rgba(255, 42, 42, 0.4); }
-    .btn-large.primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 0 30px rgba(255, 42, 42, 0.7); }
-    
+    .btn-large.primary:hover { background: var(--accent-hover); transform: translateY(-3px); }
     .btn-large.secondary { background: transparent; border: 2px solid white; color: white; }
     .btn-large.secondary:hover { background: white; color: black; transform: translateY(-3px); }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ===== SECTION COMMON ===== */
-    .section { padding: 7rem 4rem; max-width: 1400px; margin: 0 auto; }
+    /* ===== MODAL FORM ĐĂNG NHẬP / ĐĂNG KÝ ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
     
-    .section-header { margin-bottom: 4rem; display: flex; align-items: center; gap: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
     
-    .section-number {
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+    
+    .modal-overlay.active .modal-box { transform: translateY(0); }
+    
+    .close-btn {
+      position: absolute;
+      top: 15px; right: 20px;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      background: none; border: none;
+      transition: color 0.3s;
+    }
+    .close-btn:hover { color: var(--accent); }
+    
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .auth-tab {
+      flex: 1;
+      padding: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
       font-family: 'Orbitron', sans-serif;
       font-size: 1rem;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
       font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
     }
     
-    .section-title { font-size: 2.5rem; font-weight: 900; }
-    
-    /* ===== LAUNCHER SECTION ===== */
-    .launcher-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    
-    .launcher-text h2 { font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2; }
-    .launcher-text > p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 3rem; }
-    
-    .steps { display: flex; flex-direction: column; gap: 2rem; }
-    .step { display: flex; gap: 1.5rem; align-items: flex-start; }
-    
-    .step-num {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
+    .auth-tab.active {
       color: var(--accent);
-      font-size: 1.5rem;
-      opacity: 0.8;
+      border-bottom: 2px solid var(--accent);
     }
     
-    .step-text h4 { font-size: 1.1rem; margin-bottom: 0.3rem; color: #fff; }
-    .step-text p { font-size: 0.9rem; color: var(--text-muted); }
-
-    .launcher-visual {
-      background: var(--bg-card);
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      background: #1a1a1a;
       border: 1px solid var(--border);
-      padding: 3rem;
-      border-radius: 4px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .launcher-visual::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent);
-    }
-    
-    .launcher-visual i { font-size: 6rem; color: var(--accent); margin-bottom: 1.5rem; }
-    .launcher-visual h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-
-    /* ===== LIFESTYLE SECTION ===== */
-    .lifestyle-bg { background: #0d0d0d; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    
-    .lifestyle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-    
-    .lifestyle-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
-      position: relative;
-    }
-    
-    .lifestyle-card:hover { 
-      transform: translateY(-8px); 
-      border-color: var(--accent); 
-      box-shadow: 0 10px 30px rgba(255, 42, 42, 0.1);
-    }
-    
-    .lifestyle-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
-    .lifestyle-card h3 { font-size: 1.2rem; margin-bottom: 1rem; }
-    .lifestyle-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
-
-    /* ===== WORLD STATS ===== */
-    .world-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
-    
-    .stat-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 3rem 2rem;
-      text-align: center;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      outline: none;
       transition: border-color 0.3s;
     }
+    .form-group input:focus { border-color: var(--accent); }
     
-    .stat-item:hover { border-color: #444; }
-    .stat-item h3 { font-size: 2.8rem; color: var(--accent); margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(255,42,42,0.3); }
-    .stat-item p { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      border: none;
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 1rem;
+    }
+    .btn-submit:hover { background: var(--accent-hover); }
 
-    /* ===== COMMUNITY SECTION ===== */
-    .community-box {
-      background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
-      border: 1px solid var(--border);
-      padding: 6rem 2rem;
-      text-align: center;
-      border-radius: 4px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .community-box::after {
-      content: '\f392'; /* Discord Icon */
-      font-family: "Font Awesome 6 Brands";
-      position: absolute;
-      font-size: 20rem;
-      color: rgba(255,255,255,0.02);
-      bottom: -50px; right: -20px;
-      z-index: 0;
-    }
-    
-    .community-box h2 { font-size: 3rem; margin-bottom: 1rem; position: relative; z-index: 1; }
-    .community-box p { color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1.1rem; position: relative; z-index: 1; }
-    
-    .discord-stats { 
-      display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; 
-      font-size: 1rem; font-weight: 600; position: relative; z-index: 1; 
-    }
-    
-    .discord-stats span span { font-size: 1.5rem; font-family: 'Orbitron', sans-serif; margin-right: 5px; }
+    .msg-error { color: #ff4c4c; font-size: 0.85rem; margin-bottom: 1rem; display: none; text-align: center; }
+    .msg-success { color: #00ff00; font-size: 0.85rem; margin-bottom: 1rem; display: none; text-align: center; }
 
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 3rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      background: #050505;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1024px) {
-      .navbar { padding: 1rem 2rem; }
-      .nav-links { display: none; }
-      .launcher-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .section { padding: 5rem 2rem; }
-      .world-stats { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 3.5rem; }
-      .hero p { font-size: 1rem; }
-      .community-box::after { font-size: 10rem; }
-    }
-    
-    @media (max-width: 768px) {
-      .hero-buttons { flex-direction: column; width: 100%; max-width: 300px; }
-      .btn-large { width: 100%; }
-      .discord-stats { flex-direction: column; gap: 1rem; }
-      .launcher-text h2 { font-size: 2.5rem; }
-    }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="logo-text">GTA <span>NETWORK</span></div>
+    <div class="logo-text" onclick="window.scrollTo(0,0)">GTA <span>NETWORK</span></div>
     <div class="nav-links">
       <a href="#launcher">Tải xuống</a>
       <a href="#lifestyle">Lối sống</a>
       <a href="#world">Thế giới</a>
       <a href="#community">Cộng đồng</a>
     </div>
-    <div class="nav-actions">
-      <button class="btn-nav">Đăng nhập</button>
-      <button class="btn-nav primary">Đăng ký</button>
+    
+    <!-- KHU VỰC ĐĂNG NHẬP (Sẽ thay đổi bằng JS) -->
+    <div class="nav-actions" id="auth-area">
+      <button class="btn-nav" onclick="openAuthModal('login')">Đăng nhập</button>
+      <button class="btn-nav primary" onclick="openAuthModal('register')">Đăng ký</button>
     </div>
   </nav>
 
   <!-- HERO SECTION -->
   <header class="hero">
-    <h1>GTA Network <br><span>Roleplay</span></h1>
+    <h1>VietGangz <br><span>Roleplay</span></h1>
     <p>Trò chơi trực tuyến nhiều người chơi với một thế giới mở rộng lớn trong đó Bạn có thể trở thành bất cứ ai bạn muốn!</p>
     <div class="hero-buttons">
       <button class="btn-large primary">Tải Launcher</button>
@@ -339,170 +300,223 @@
     </div>
   </header>
 
-  <!-- LAUNCHER SECTION -->
-  <section id="launcher" class="section">
-    <div class="section-header">
-      <span class="section-number">02</span>
-      <h2 class="section-title">Launcher</h2>
-    </div>
-    <div class="launcher-grid">
-      <div class="launcher-text">
-        <h2>Tải về.<br>Đăng nhập.<br>Vào game.</h2>
-        <p>Một launcher cho PC và Android: tự tải game, kiểm tra từng file, cập nhật khi có bản mới và đưa bạn thẳng vào máy chủ. Miễn phí.</p>
-        
-        <div class="steps">
-          <div class="step">
-            <span class="step-num">01</span>
-            <div class="step-text">
-              <h4>Chọn nền tảng</h4>
-              <p>Máy tính Windows hoặc điện thoại Android.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-num">02</span>
-            <div class="step-text">
-              <h4>Cài launcher</h4>
-              <p>Launcher tự tải, kiểm tra và cập nhật dữ liệu game.</p>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-num">03</span>
-            <div class="step-text">
-              <h4>Vào thành phố</h4>
-              <p>Đăng ký tài khoản, tạo nhân vật và bấm VÀO GAME.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- MODAL FORM (ẨN MẶC ĐỊNH) -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-box">
+      <button class="close-btn" onclick="closeAuthModal()">&times;</button>
       
-      <div class="launcher-visual">
-        <i class="fab fa-windows"></i>
-        <h3>Tải Game Ngay</h3>
-        <p style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 2rem;">Hỗ trợ PC & Android</p>
-        <button class="btn-large primary" style="width: 100%;">Download for PC</button>
-        <button class="btn-large secondary" style="width: 100%; margin-top: 1rem;">Download for Android</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Đăng Nhập</button>
+        <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Đăng Ký</button>
       </div>
-    </div>
-  </section>
 
-  <!-- LIFESTYLE SECTION -->
-  <div class="lifestyle-bg">
-    <section id="lifestyle" class="section">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <h2 class="section-title">Lối sống</h2>
+      <div id="message-box">
+        <div class="msg-error" id="msgError"></div>
+        <div class="msg-success" id="msgSuccess"></div>
       </div>
-      <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">Một thành phố. Vô vàn cách sống.</h3>
-      <p style="color: var(--text-muted); max-width: 800px; margin-bottom: 4rem; font-size: 1.1rem;">GTA Network là máy chủ GTA San Andreas Multiplayer RPG × Roleplay của người Việt: bạn chọn trở thành ai, thành phố ghi nhớ mọi điều bạn làm.</p>
-      
-      <div class="lifestyle-grid">
-        <div class="lifestyle-card">
-          <i class="fas fa-briefcase"></i>
-          <h3>Nghề nghiệp & kinh tế</h3>
-          <p>Bốc vác, giao pizza, vận tải, khai thác gỗ, khai thác mỏ, vận tải thuyền. Lương theo giờ chơi vào tài khoản ngân hàng.</p>
+
+      <!-- FORM ĐĂNG NHẬP -->
+      <form id="form-login" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Tên tài khoản (Username)</label>
+          <input type="text" id="loginUser" required placeholder="Nhập tên tài khoản...">
         </div>
-        <div class="lifestyle-card">
-          <i class="fas fa-home"></i>
-          <h3>Nhà & xe của riêng bạn</h3>
-          <p>Mua nhà, sở hữu xe với màu sơn và đồ độ riêng, gửi xe ở garage, cất đồ trong cốp.</p>
+        <div class="form-group">
+          <label>Mật khẩu</label>
+          <input type="password" id="loginPass" required placeholder="Nhập mật khẩu...">
         </div>
-        <div class="lifestyle-card">
-          <i class="fas fa-balance-scale"></i>
-          <h3>Tổ chức & pháp luật</h3>
-          <p>LSPD và LSFD với cấp bậc, tủ đồ, xe công vụ và kênh bộ đàm riêng.</p>
+        <button type="submit" class="btn-submit">Vào Thành Phố</button>
+      </form>
+
+      <!-- FORM ĐĂNG KÝ -->
+      <form id="form-register" style="display: none;" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label>Tên tài khoản</label>
+          <input type="text" id="regUser" required placeholder="Viết liền không dấu...">
         </div>
-        <div class="lifestyle-card">
-          <i class="fas fa-city"></i>
-          <h3>Cuộc sống thành phố</h3>
-          <p>Cửa hàng 24/7, ngân hàng, điện thoại, GPS, trạm thu phí và bằng lái xe.</p>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="regEmail" required placeholder="example@gmail.com">
         </div>
-        <div class="lifestyle-card">
-          <i class="fas fa-desktop"></i>
-          <h3>Một nhân vật, hai nền tảng</h3>
-          <p>Máy tính và điện thoại chơi chung một máy chủ với cùng một tài khoản.</p>
+        <div class="form-group">
+          <label>Mật khẩu</label>
+          <input type="password" id="regPass" required placeholder="Tối thiểu 6 ký tự...">
         </div>
-        <div class="lifestyle-card">
-          <i class="fas fa-sync-alt"></i>
-          <h3>Luôn là bản mới nhất</h3>
-          <p>Launcher tự kiểm tra, sửa và cập nhật dữ liệu game — không cần cài lại.</p>
-        </div>
-      </div>
-    </section>
+        <button type="submit" class="btn-submit">Tạo Tài Khoản</button>
+      </form>
+
+    </div>
   </div>
 
-  <!-- WORLD SECTION -->
-  <section id="world" class="section">
-    <div class="section-header">
-      <span class="section-number">04</span>
-      <h2 class="section-title">Thế giới</h2>
-    </div>
-    <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">Toàn bộ San Andreas.</h3>
-    <p style="color: var(--text-muted); max-width: 800px; margin-bottom: 3rem; font-size: 1.1rem;">Los Santos, San Fierro, Las Venturas và vùng quê ở giữa — một bản đồ, một máy chủ, mở cửa cho cả PC và Android.</p>
-    
-    <div class="world-stats">
-      <div class="stat-item">
-        <h3>3</h3>
-        <p>Thành phố</p>
-      </div>
-      <div class="stat-item">
-        <h3>PC + Android</h3>
-        <p>Nền tảng</p>
-      </div>
-      <div class="stat-item">
-        <h3 style="color: #00ff00; text-shadow: 0 0 10px rgba(0,255,0,0.3);">Online · 17</h3>
-        <p>Người chơi</p>
-      </div>
-    </div>
+  <!-- CÁC SECTION KHÁC (Rút gọn) -->
+  <section id="launcher" style="padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border);">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Launcher</h2>
+    <p style="color: var(--text-muted);">Tải game để tham gia cùng hàng ngàn người chơi khác.</p>
+  </section>
+  <section id="lifestyle" style="padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border);">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Lối sống</h2>
+    <p style="color: var(--text-muted);">Tự do làm bất cứ điều gì bạn muốn trong thành phố.</p>
   </section>
 
-  <!-- COMMUNITY SECTION -->
-  <section id="community" class="section">
-    <div class="section-header">
-      <span class="section-number">05</span>
-      <h2 class="section-title">Cộng đồng</h2>
-    </div>
-    <div class="community-box">
-      <h2>Gặp nhau trên Discord.</h2>
-      <p>Tin tức, sự kiện, hỗ trợ người chơi và những người bạn đồng hành ở Los Santos.</p>
-      <button class="btn-large primary" style="position: relative; z-index: 1;"><i class="fab fa-discord"></i> Tham Gia Máy Chủ</button>
-      
-      <div class="discord-stats">
-        <span><span style="color: var(--accent);">855</span> thành viên</span>
-        <span><span style="color: #00ff00;">49</span> đang online</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2024 GTA Network. Bản quyền thuộc về cộng đồng.</p>
+  <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem;">
+    <p>&copy; 2026 Lê Trung. Bản quyền thuộc về cộng đồng.</p>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // Hiệu ứng thu nhỏ thanh Navbar khi cuộn trang
-    window.addEventListener('scroll', () => {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 50) {
-        navbar.style.padding = '0.8rem 4rem';
-        navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-        navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.5)';
+    /* ================= LOGIC XÁC THỰC TÀI KHOẢN ================= */
+
+    // Khởi tạo mảng User nếu chưa có trong bộ nhớ trình duyệt
+    let users = JSON.parse(localStorage.getItem('gta_users')) || [];
+
+    // Lưu mảng User
+    function saveUsers() {
+      localStorage.setItem('gta_users', JSON.stringify(users));
+    }
+
+    // Kiểm tra trạng thái đăng nhập khi tải trang
+    function checkAuthState() {
+      const currentUser = JSON.parse(localStorage.getItem('gta_current_user'));
+      const authArea = document.getElementById('auth-area');
+
+      if (currentUser) {
+        // Nếu đã đăng nhập -> Đổi giao diện Navbar
+        authArea.innerHTML = `
+          <div class="user-profile">
+            <span class="user-name"><i class="fas fa-user-circle"></i> ${currentUser.username}</span>
+            <span class="btn-logout" onclick="handleLogout()">Đăng xuất</span>
+          </div>
+        `;
       } else {
-        navbar.style.padding = '1.5rem 4rem';
-        navbar.style.background = 'rgba(10, 10, 10, 0.85)';
-        navbar.style.boxShadow = 'none';
+        // Nếu chưa đăng nhập -> Hiện nút Đăng nhập/Đăng ký
+        authArea.innerHTML = `
+          <button class="btn-nav" onclick="openAuthModal('login')">Đăng nhập</button>
+          <button class="btn-nav primary" onclick="openAuthModal('register')">Đăng ký</button>
+        `;
       }
+    }
+
+    // Gọi hàm kiểm tra ngay khi tải trang
+    document.addEventListener("DOMContentLoaded", checkAuthState);
+
+    /* ==== XỬ LÝ GIAO DIỆN MODAL ==== */
+    const modal = document.getElementById('authModal');
+
+    function openAuthModal(type) {
+      modal.classList.add('active');
+      switchTab(type);
+      hideMessages();
+    }
+
+    function closeAuthModal() {
+      modal.classList.remove('active');
+    }
+
+    function switchTab(type) {
+      document.getElementById('tab-login').classList.remove('active');
+      document.getElementById('tab-register').classList.remove('active');
+      document.getElementById('form-login').style.display = 'none';
+      document.getElementById('form-register').style.display = 'none';
+
+      if (type === 'login') {
+        document.getElementById('tab-login').classList.add('active');
+        document.getElementById('form-login').style.display = 'block';
+      } else {
+        document.getElementById('tab-register').classList.add('active');
+        document.getElementById('form-register').style.display = 'block';
+      }
+      hideMessages();
+    }
+
+    // Đóng modal khi click ra ngoài vùng đen
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeAuthModal();
     });
 
-    // Cuộn mượt khi click vào menu
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
+    /* ==== HIỂN THỊ THÔNG BÁO ==== */
+    function showError(msg) {
+      const err = document.getElementById('msgError');
+      err.textContent = msg;
+      err.style.display = 'block';
+      document.getElementById('msgSuccess').style.display = 'none';
+    }
+    function showSuccess(msg) {
+      const suc = document.getElementById('msgSuccess');
+      suc.textContent = msg;
+      suc.style.display = 'block';
+      document.getElementById('msgError').style.display = 'none';
+    }
+    function hideMessages() {
+      document.getElementById('msgError').style.display = 'none';
+      document.getElementById('msgSuccess').style.display = 'none';
+    }
+
+    /* ==== XỬ LÝ ĐĂNG KÝ ==== */
+    function handleRegister(e) {
+      e.preventDefault();
+      const username = document.getElementById('regUser').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPass').value;
+
+      if (password.length < 6) return showError('Mật khẩu phải từ 6 ký tự trở lên!');
+      
+      // Kiểm tra trùng tên
+      if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
+        return showError('Tên tài khoản này đã có người sử dụng!');
+      }
+
+      // Tạo user mới
+      const newUser = {
+        id: Date.now(),
+        username: username,
+        email: email,
+        password: password
+      };
+
+      users.push(newUser);
+      saveUsers();
+
+      showSuccess('Đăng ký thành công! Hãy đăng nhập.');
+      
+      // Tự động chuyển sang tab đăng nhập sau 1.5s
+      setTimeout(() => {
+        switchTab('login');
+        document.getElementById('loginUser').value = username; // Điền sẵn tên
+        document.getElementById('form-register').reset();
+      }, 1500);
+    }
+
+    /* ==== XỬ LÝ ĐĂNG NHẬP ==== */
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('loginUser').value.trim();
+      const password = document.getElementById('loginPass').value;
+
+      // Tìm user trong DB
+      const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+
+      if (user) {
+        // Lưu trạng thái đăng nhập
+        localStorage.setItem('gta_current_user', JSON.stringify(user));
+        showSuccess(`Chào mừng ${user.username} trở lại!`);
+        
+        setTimeout(() => {
+          closeAuthModal();
+          checkAuthState(); // Cập nhật Navbar
+          document.getElementById('form-login').reset();
+          hideMessages();
+        }, 1000);
+      } else {
+        showError('Sai tên tài khoản hoặc mật khẩu!');
+      }
+    }
+
+    /* ==== XỬ LÝ ĐĂNG XUẤT ==== */
+    function handleLogout() {
+      if(confirm('Bạn có chắc muốn đăng xuất?')) {
+        localStorage.removeItem('gta_current_user');
+        checkAuthState(); // Cập nhật lại Navbar
+      }
+    }
   </script>
 </body>
 </html>
