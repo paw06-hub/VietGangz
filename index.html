@@ -1,718 +1,873 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jolibi - Gà Rán Ngon Đỉnh</title>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jollibee Việt Nam — Chickenjoy Giòn Rụm | Đặt Món Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --jollibee-red:#e31837;
+  --jollibee-red-dark:#b30f27;
+  --jollibee-red-deep:#7a0a1a;
+  --jollibee-yellow:#ffc72c;
+  --jollibee-yellow-light:#ffe08a;
+  --jollibee-blue:#003da5;
+  --cream:#fff8f0;
+  --cream-2:#fdf0e4;
+  --brown:#2a1508;
+  --brown-mid:#5c3d2e;
+  --text-muted:#8a6f5c;
+  --white:#ffffff;
+  --shadow-sm:0 2px 10px rgba(42,21,8,.06);
+  --shadow-md:0 10px 30px rgba(42,21,8,.12);
+  --shadow-lg:0 24px 60px rgba(42,21,8,.18);
+  --radius:24px;
+  --radius-sm:14px;
+  --transition:.3s cubic-bezier(.4,0,.2,1);
+  --font:'Be Vietnam Pro',system-ui,sans-serif;
+  --font-fun:'Baloo 2',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--cream);color:var(--brown);
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
 
-        body {
-            background-color: #fff9f0;
-            color: #2d1e0f;
-        }
+/* ===== TOP BAR ===== */
+.topbar{background:var(--jollibee-red-deep);color:#ffe;font-size:.8rem}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;height:38px;gap:10px;flex-wrap:wrap}
+.topbar-info{display:flex;gap:22px;align-items:center}
+.topbar-info span{display:flex;align-items:center;gap:6px;opacity:.92}
+.topbar-info i{color:var(--jollibee-yellow)}
+.topbar-social{display:flex;gap:12px}
+.topbar-social a{opacity:.85;transition:var(--transition);font-size:.9rem}
+.topbar-social a:hover{opacity:1;color:var(--jollibee-yellow);transform:translateY(-1px)}
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #b22222, #d43d3d);
-            color: white;
-            padding: 1rem 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* ===== HEADER ===== */
+.header{
+  position:sticky;top:0;z-index:1000;background:rgba(255,248,240,.95);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(42,21,8,.08);transition:var(--transition);
+}
+.header.scrolled{box-shadow:var(--shadow-md)}
+.header .container{display:flex;align-items:center;justify-content:space-between;height:84px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo-mark{
+  width:54px;height:54px;border-radius:16px;
+  background:linear-gradient(145deg,var(--jollibee-red),var(--jollibee-red-dark));
+  display:grid;place-items:center;font-size:1.7rem;
+  box-shadow:0 6px 18px rgba(227,24,55,.4),inset 0 -3px 6px rgba(0,0,0,.2);
+  transform:rotate(-5deg);transition:var(--transition);
+}
+.logo:hover .logo-mark{transform:rotate(5deg) scale(1.06)}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-text .brand{font-family:var(--font-fun);font-size:1.65rem;font-weight:800;color:var(--jollibee-red);letter-spacing:.5px}
+.logo-text .tagline{font-size:.6rem;font-weight:700;letter-spacing:2.5px;color:var(--brown-mid);text-transform:uppercase;margin-top:3px}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{position:relative;padding:10px 16px;border-radius:12px;font-weight:600;font-size:.92rem;color:var(--brown-mid);transition:var(--transition)}
+.nav a::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:0;height:3px;border-radius:2px;background:var(--jollibee-red);transition:width var(--transition)}
+.nav a:hover{color:var(--jollibee-red);background:rgba(227,24,55,.05)}
+.nav a:hover::after,.nav a.active::after{width:22px}
+.nav a.active{color:var(--jollibee-red);font-weight:700}
 
-        .logo i {
-            font-size: 2.5rem;
-            color: #ffd966;
-            filter: drop-shadow(2px 2px 0 #7a1f1f);
-        }
+.header-actions{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:.9rem;padding:12px 24px;border-radius:50px;transition:var(--transition);white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--jollibee-red),var(--jollibee-red-dark));color:#fff;box-shadow:0 6px 18px rgba(227,24,55,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(227,24,55,.5)}
+.btn-outline{background:transparent;color:var(--brown);border:2px solid rgba(42,21,8,.15)}
+.btn-outline:hover{border-color:var(--jollibee-red);color:var(--jollibee-red);background:rgba(227,24,55,.04)}
 
-        .logo span {
-            text-shadow: 3px 3px 0 #7a1f1f;
-        }
+.cart-btn{
+  position:relative;display:flex;align-items:center;gap:10px;
+  background:var(--jollibee-red);color:#fff;padding:11px 18px;
+  border-radius:50px;font-weight:700;font-size:.88rem;
+  transition:var(--transition);box-shadow:0 6px 16px rgba(227,24,55,.3);
+}
+.cart-btn:hover{background:var(--jollibee-red-dark);transform:translateY(-2px);box-shadow:0 10px 24px rgba(227,24,55,.45)}
+.cart-badge{
+  position:absolute;top:-7px;right:-7px;background:var(--jollibee-yellow);color:var(--brown);
+  min-width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  font-size:.72rem;font-weight:900;border:2.5px solid var(--cream);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.cart-badge.bump{transform:scale(1.4)}
+.mobile-toggle{display:none;background:none;font-size:1.5rem;color:var(--brown);padding:6px}
 
-        .cart-icon {
-            background: #ffd966;
-            color: #7a1f1f;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 2px solid #fff3c9;
-            box-shadow: 0 4px 0 #7a1f1f;
-        }
+/* ===== HERO ===== */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#e31837 0%,#b30f27 55%,#7a0a1a 100%);
+  color:#fff;padding:90px 0 110px;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 85% 25%,rgba(255,199,44,.35) 0%,transparent 45%),
+    radial-gradient(circle at 10% 80%,rgba(255,199,44,.2) 0%,transparent 40%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.08) 1.5px,transparent 1.5px);
+  background-size:30px 30px;pointer-events:none;
+}
+.hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:50px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(255,199,44,.18);border:1.5px solid rgba(255,199,44,.5);
+  color:var(--jollibee-yellow-light);padding:8px 18px;border-radius:50px;
+  font-size:.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:26px;animation:fadeUp .8s both;
+}
+.hero-badge i{animation:spin 5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero h1{font-family:var(--font-fun);font-size:clamp(2.6rem,5.4vw,4.3rem);line-height:1.05;font-weight:800;margin-bottom:22px;animation:fadeUp .8s .1s both}
+.hero h1 .accent{color:var(--jollibee-yellow);position:relative;display:inline-block}
+.hero h1 .accent::after{content:'';position:absolute;left:0;bottom:2px;width:100%;height:12px;background:rgba(255,199,44,.3);border-radius:4px;z-index:-1}
+.hero p{font-size:1.08rem;opacity:.9;max-width:480px;margin-bottom:34px;animation:fadeUp .8s .2s both}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .3s both}
+.hero .btn-primary{background:linear-gradient(135deg,var(--jollibee-yellow),#e0a800);color:var(--brown);font-weight:800;box-shadow:0 10px 30px rgba(255,199,44,.4)}
+.hero .btn-primary:hover{background:linear-gradient(135deg,#ffd966,#ffc72c);box-shadow:0 14px 36px rgba(255,199,44,.55)}
+.hero .btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.3);backdrop-filter:blur(10px)}
+.hero .btn-ghost:hover{background:rgba(255,255,255,.2);border-color:var(--jollibee-yellow)}
+.hero-stats{display:flex;gap:34px;margin-top:48px;animation:fadeUp .8s .4s both;flex-wrap:wrap}
+.hero-stat .num{font-family:var(--font-fun);font-size:1.9rem;font-weight:800;color:var(--jollibee-yellow)}
+.hero-stat .lbl{font-size:.76rem;opacity:.75;letter-spacing:.5px}
 
-        .cart-icon:hover {
-            background: #ffeaa0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #7a1f1f;
-        }
+.hero-visual{position:relative;display:grid;place-items:center;animation:fadeUp .9s .2s both}
+.hero-plate{
+  width:min(430px,92%);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ffe08a,#ffc72c 45%,#d99e00 100%);
+  display:grid;place-items:center;position:relative;
+  box-shadow:0 40px 90px rgba(0,0,0,.5),inset 0 -14px 40px rgba(0,0,0,.25);
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-22px) rotate(2deg)}}
+.hero-plate .emoji{font-size:clamp(7rem,15vw,11.5rem);filter:drop-shadow(0 18px 24px rgba(0,0,0,.35))}
+.hero-plate::before{content:'';position:absolute;inset:-14px;border-radius:50%;border:2.5px dashed rgba(255,199,44,.6);animation:spin 32s linear infinite}
+.floating-chip{
+  position:absolute;background:#fff;color:var(--brown);padding:11px 18px;
+  border-radius:16px;font-weight:800;font-size:.85rem;box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:9px;animation:float 5s ease-in-out infinite;
+}
+.floating-chip i{color:var(--jollibee-red);font-size:1.1rem}
+.chip-1{top:5%;right:-4%;animation-delay:.6s}
+.chip-2{bottom:10%;left:-6%;animation-delay:1.2s}
+.chip-3{top:48%;right:-9%;animation-delay:1.8s;background:var(--jollibee-blue);color:#fff}
+.chip-3 i{color:var(--jollibee-yellow)}
 
-        .cart-icon i {
-            font-size: 1.3rem;
-        }
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
-        .cart-count {
-            background: #7a1f1f;
-            color: #ffd966;
-            border-radius: 50%;
-            width: 26px;
-            height: 26px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            font-weight: 900;
-        }
+/* ===== TRUST BAR ===== */
+.trustbar{background:#fff;border-bottom:1px solid rgba(42,21,8,.06);padding:26px 0}
+.trustbar .container{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.trust-item{display:flex;align-items:center;gap:14px;justify-content:center}
+.trust-icon{width:48px;height:48px;border-radius:14px;flex-shrink:0;background:linear-gradient(145deg,rgba(227,24,55,.08),rgba(227,24,55,.15));color:var(--jollibee-red);display:grid;place-items:center;font-size:1.2rem}
+.trust-item h4{font-size:.92rem;font-weight:800;color:var(--brown)}
+.trust-item p{font-size:.78rem;color:var(--text-muted)}
 
-        /* Hero banner */
-        .hero {
-            background: linear-gradient(120deg, #ffe9c7, #ffd9a3);
-            padding: 2.5rem 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            border-bottom: 5px dashed #b22222;
-        }
+/* ===== SECTION ===== */
+.section{padding:90px 0}
+.section-head{text-align:center;max-width:660px;margin:0 auto 56px}
+.section-eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--jollibee-red);font-weight:800;font-size:.76rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+.section-eyebrow::before,.section-eyebrow::after{content:'';width:26px;height:2.5px;background:var(--jollibee-yellow);border-radius:2px}
+.section-head h2{font-family:var(--font-fun);font-size:clamp(2rem,4.2vw,3rem);font-weight:800;line-height:1.15;color:var(--brown)}
+.section-head p{color:var(--text-muted);font-size:1.02rem;margin-top:14px}
 
-        .hero-text h1 {
-            font-size: 2.8rem;
-            color: #7a1f1f;
-            margin-bottom: 12px;
-            text-shadow: 2px 2px 0 #ffd966;
-        }
+/* ===== FILTERS ===== */
+.menu-filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:44px}
+.filter-btn{padding:11px 26px;border-radius:50px;font-weight:700;font-size:.86rem;background:#fff;color:var(--brown-mid);border:1.5px solid rgba(42,21,8,.1);transition:var(--transition)}
+.filter-btn:hover{border-color:var(--jollibee-red);color:var(--jollibee-red);transform:translateY(-2px)}
+.filter-btn.active{background:var(--jollibee-red);color:#fff;border-color:var(--jollibee-red);box-shadow:0 8px 20px rgba(227,24,55,.3)}
 
-        .hero-text p {
-            font-size: 1.2rem;
-            color: #4b2e1a;
-            margin-bottom: 20px;
-            max-width: 500px;
-        }
+/* ===== PRODUCT GRID ===== */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:30px}
+.product-card{
+  background:#fff;border-radius:var(--radius);overflow:hidden;position:relative;
+  border:1px solid rgba(42,21,8,.06);box-shadow:var(--shadow-sm);
+  transition:var(--transition);display:flex;flex-direction:column;
+  opacity:0;transform:translateY(30px);animation:cardIn .6s forwards;
+}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.product-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);border-color:rgba(227,24,55,.2)}
+.product-media{position:relative;aspect-ratio:4/3;background:linear-gradient(145deg,var(--cream-2),#f7e3cf);display:grid;place-items:center;overflow:hidden}
+.product-media .emoji{font-size:5rem;transition:transform .5s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 12px 18px rgba(42,21,8,.18))}
+.product-card:hover .product-media .emoji{transform:scale(1.15) rotate(-6deg)}
+.product-tag{position:absolute;top:14px;left:14px;background:var(--jollibee-red);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.8px;padding:6px 13px;border-radius:50px;text-transform:uppercase;box-shadow:0 4px 12px rgba(227,24,55,.4)}
+.product-tag.hot{background:linear-gradient(135deg,#ff8a00,#ffc72c);color:var(--brown)}
+.product-tag.new{background:var(--jollibee-blue)}
+.product-fav{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);display:grid;place-items:center;color:var(--brown-mid);font-size:.95rem;transition:var(--transition);border:1px solid rgba(42,21,8,.06)}
+.product-fav:hover{background:var(--jollibee-red);color:#fff;transform:scale(1.1)}
+.product-fav.liked{background:var(--jollibee-red);color:#fff}
+.product-body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.product-cat{font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--jollibee-red);margin-bottom:6px}
+.product-name{font-size:1.16rem;font-weight:800;color:var(--brown);line-height:1.3;margin-bottom:6px}
+.product-desc{font-size:.85rem;color:var(--text-muted);margin-bottom:14px;flex:1}
+.product-rating{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--text-muted);margin-bottom:16px}
+.product-rating .stars{color:var(--jollibee-yellow);letter-spacing:1px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.15))}
+.product-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
+.product-price{display:flex;flex-direction:column;line-height:1.2}
+.product-price .now{font-size:1.4rem;font-weight:900;color:var(--jollibee-red)}
+.product-price .old{font-size:.8rem;color:var(--text-muted);text-decoration:line-through}
+.add-btn{width:46px;height:46px;border-radius:14px;flex-shrink:0;background:var(--jollibee-red);color:#fff;display:grid;place-items:center;font-size:1.1rem;transition:var(--transition);box-shadow:0 6px 14px rgba(227,24,55,.3)}
+.add-btn:hover{background:var(--jollibee-red-dark);transform:translateY(-3px) rotate(-90deg);box-shadow:0 10px 22px rgba(227,24,55,.45)}
+.add-btn:active{transform:scale(.92)}
 
-        .hero-text .promo {
-            background: #b22222;
-            color: #ffd966;
-            display: inline-block;
-            padding: 8px 24px;
-            border-radius: 40px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 0 #6b1414;
-        }
+/* ===== STORY ===== */
+.story{
+  background:linear-gradient(135deg,var(--jollibee-red),var(--jollibee-red-dark));
+  color:#fff;border-radius:32px;overflow:hidden;position:relative;
+  padding:70px 60px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;
+}
+.story::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 20%,rgba(255,199,44,.3),transparent 45%)}
+.story > *{position:relative;z-index:2}
+.story-eyebrow{color:var(--jollibee-yellow);font-weight:800;font-size:.76rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px}
+.story h2{font-family:var(--font-fun);font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:20px}
+.story h2 em{color:var(--jollibee-yellow);font-style:normal}
+.story p{opacity:.92;margin-bottom:16px;font-size:.96rem}
+.story ul{list-style:none;margin:22px 0 32px}
+.story li{display:flex;align-items:center;gap:14px;margin-bottom:14px;font-size:.94rem;font-weight:500}
+.story li i{width:30px;height:30px;border-radius:50%;flex-shrink:0;background:rgba(255,199,44,.2);color:var(--jollibee-yellow);display:grid;place-items:center;font-size:.8rem}
+.story-visual{display:grid;place-items:center;position:relative}
+.story-circle{
+  width:min(340px,100%);aspect-ratio:1;border-radius:50%;
+  background:linear-gradient(145deg,var(--jollibee-yellow),#e0a800);
+  display:grid;place-items:center;box-shadow:0 30px 60px rgba(0,0,0,.4);
+  animation:float 7s ease-in-out infinite;
+}
+.story-circle .emoji{font-size:9rem;filter:drop-shadow(0 16px 24px rgba(0,0,0,.3))}
 
-        .hero-img {
-            font-size: 8rem;
-            filter: drop-shadow(8px 8px 0 rgba(0, 0, 0, 0.1));
-            transform: rotate(5deg);
-        }
+/* ===== TESTIMONIALS ===== */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.testi{background:#fff;border-radius:var(--radius);padding:34px 30px;position:relative;border:1px solid rgba(42,21,8,.06);box-shadow:var(--shadow-sm);transition:var(--transition)}
+.testi:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.testi .quote-mark{font-family:var(--font-fun);font-size:4rem;line-height:1;color:rgba(227,24,55,.12);position:absolute;top:14px;right:24px}
+.testi .stars{color:var(--jollibee-yellow);margin-bottom:16px;font-size:.9rem;letter-spacing:2px}
+.testi p{font-size:.95rem;color:var(--brown-mid);margin-bottom:24px;line-height:1.7}
+.testi-author{display:flex;align-items:center;gap:14px}
+.testi-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(145deg,var(--jollibee-red),var(--jollibee-red-dark));color:#fff;display:grid;place-items:center;font-weight:900;font-size:1rem}
+.testi-author h5{font-size:.95rem;font-weight:800;color:var(--brown)}
+.testi-author span{font-size:.8rem;color:var(--text-muted)}
 
-        /* Menu grid */
-        .menu-section {
-            padding: 3rem 5%;
-        }
+/* ===== CTA ===== */
+.cta-banner{background:linear-gradient(135deg,var(--jollibee-blue),#002a75);border-radius:32px;padding:64px 60px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.cta-banner::before{content:'🍗';position:absolute;font-size:14rem;opacity:.1;top:-40px;left:-30px;transform:rotate(-20deg)}
+.cta-banner::after{content:'🐝';position:absolute;font-size:12rem;opacity:.12;bottom:-50px;right:-20px;transform:rotate(20deg)}
+.cta-banner > *{position:relative;z-index:2}
+.cta-banner h2{font-family:var(--font-fun);font-size:clamp(2rem,4.2vw,2.9rem);font-weight:800;margin-bottom:16px}
+.cta-banner p{opacity:.92;font-size:1.04rem;margin-bottom:32px;max-width:540px;margin-inline:auto}
+.cta-banner .btn{background:var(--jollibee-yellow);color:var(--brown);font-weight:800;font-size:1rem;padding:16px 40px;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.cta-banner .btn:hover{background:var(--jollibee-yellow-light);transform:translateY(-3px) scale(1.03)}
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #7a1f1f;
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
+/* ===== FOOTER ===== */
+.footer{background:#1e0f08;color:#c9b6a6;padding:70px 0 0;margin-top:90px}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:44px;padding-bottom:54px}
+.footer-brand .logo-text .brand{color:var(--cream)}
+.footer-brand .logo-text .tagline{color:var(--jollibee-yellow)}
+.footer-brand p{margin:20px 0 24px;font-size:.9rem;opacity:.75;line-height:1.75;max-width:300px}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);display:grid;place-items:center;color:var(--cream);font-size:.95rem;transition:var(--transition)}
+.footer-social a:hover{background:var(--jollibee-red);transform:translateY(-3px)}
+.footer h4{color:var(--cream);font-size:.95rem;font-weight:800;margin-bottom:22px;letter-spacing:.5px}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:12px}
+.footer-links a{font-size:.88rem;opacity:.75;transition:var(--transition);display:inline-flex;align-items:center;gap:8px}
+.footer-links a:hover{opacity:1;color:var(--jollibee-yellow);transform:translateX(4px)}
+.footer-links a::before{content:'›';color:var(--jollibee-yellow);font-weight:900}
+.footer-contact li{display:flex;gap:12px;margin-bottom:16px;font-size:.88rem;align-items:flex-start;opacity:.8}
+.footer-contact i{color:var(--jollibee-yellow);margin-top:3px;width:16px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:24px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.8rem;opacity:.6}
+.footer-bottom a{color:var(--jollibee-yellow)}
 
-        .section-title::after {
-            content: "🍗🍗🍗";
-            display: block;
-            font-size: 1.5rem;
-            letter-spacing: 10px;
-            margin-top: 8px;
-        }
+/* ===== CART DRAWER ===== */
+.cart-overlay{position:fixed;inset:0;background:rgba(20,10,5,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:2000;opacity:0;visibility:hidden;transition:var(--transition)}
+.cart-overlay.open{opacity:1;visibility:visible}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--cream);z-index:2001;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,.3)}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{display:flex;align-items:center;justify-content:space-between;padding:24px 26px;border-bottom:1px solid rgba(42,21,8,.1)}
+.cart-head h3{font-family:var(--font-fun);font-size:1.4rem;font-weight:800;display:flex;align-items:center;gap:10px;color:var(--brown)}
+.cart-head h3 i{color:var(--jollibee-red)}
+.cart-close{width:40px;height:40px;border-radius:50%;background:rgba(42,21,8,.06);color:var(--brown);display:grid;place-items:center;font-size:1.1rem;transition:var(--transition)}
+.cart-close:hover{background:var(--jollibee-red);color:#fff;transform:rotate(90deg)}
+.cart-body{flex:1;overflow-y:auto;padding:20px 26px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.cart-empty .big-emoji{font-size:4rem;margin-bottom:16px;display:block;opacity:.5}
+.cart-empty h4{font-size:1.1rem;color:var(--brown);margin-bottom:8px}
+.cart-empty p{font-size:.88rem}
+.cart-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px dashed rgba(42,21,8,.12);animation:slideIn .35s}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.cart-item-media{width:64px;height:64px;border-radius:14px;flex-shrink:0;background:linear-gradient(145deg,var(--cream-2),#f0dfc6);display:grid;place-items:center;font-size:2rem}
+.cart-item-main{flex:1;min-width:0}
+.cart-item-name{font-weight:700;font-size:.92rem;color:var(--brown);margin-bottom:4px}
+.cart-item-price{font-size:.8rem;color:var(--text-muted);margin-bottom:8px}
+.cart-qty{display:flex;align-items:center;gap:10px}
+.qty-btn{width:28px;height:28px;border-radius:8px;background:#fff;border:1.5px solid rgba(42,21,8,.15);color:var(--brown);font-weight:900;font-size:.95rem;display:grid;place-items:center;transition:var(--transition)}
+.qty-btn:hover{background:var(--jollibee-red);border-color:var(--jollibee-red);color:#fff}
+.cart-qty span{font-weight:800;font-size:.9rem;min-width:20px;text-align:center}
+.cart-item-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
+.cart-item-total{font-weight:900;color:var(--jollibee-red);font-size:.95rem}
+.remove-item{background:none;color:var(--text-muted);font-size:.78rem;display:flex;align-items:center;gap:5px;transition:var(--transition)}
+.remove-item:hover{color:var(--jollibee-red)}
+.cart-foot{padding:22px 26px 26px;border-top:1px solid rgba(42,21,8,.1);background:#fff}
+.cart-summary-row{display:flex;justify-content:space-between;font-size:.88rem;color:var(--text-muted);margin-bottom:10px}
+.cart-summary-row.total{font-size:1.3rem;font-weight:900;color:var(--brown);padding-top:14px;border-top:1px dashed rgba(42,21,8,.15);margin-top:8px}
+.cart-summary-row.total span:last-child{color:var(--jollibee-red)}
+.checkout-btn{width:100%;margin-top:18px;padding:17px;border-radius:16px;background:linear-gradient(135deg,var(--jollibee-red),var(--jollibee-red-dark));color:#fff;font-weight:800;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 10px 26px rgba(227,24,55,.35);transition:var(--transition)}
+.checkout-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(227,24,55,.5)}
+.checkout-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
-            margin-bottom: 3rem;
-        }
+/* ===== TOAST ===== */
+.toast-wrap{position:fixed;bottom:26px;right:26px;z-index:3000;display:flex;flex-direction:column;gap:10px}
+.toast{background:var(--brown);color:var(--cream);padding:14px 22px;border-radius:14px;display:flex;align-items:center;gap:12px;font-size:.88rem;font-weight:600;box-shadow:var(--shadow-lg);animation:toastIn .4s cubic-bezier(.34,1.56,.64,1);border-left:4px solid var(--jollibee-yellow)}
+.toast i{color:var(--jollibee-yellow);font-size:1.1rem}
+@keyframes toastIn{from{opacity:0;transform:translateX(100px)}to{opacity:1;transform:translateX(0)}}
+.toast.out{animation:toastOut .3s forwards}
+@keyframes toastOut{to{opacity:0;transform:translateX(100px)}}
 
-        .product-card {
-            background: white;
-            border-radius: 30px 30px 20px 20px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 0 #b22222;
-            padding: 20px 16px 20px;
-            transition: 0.25s ease;
-            border: 2px solid #f0d5b0;
-            display: flex;
-            flex-direction: column;
-        }
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:translateY(0)}
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 30px rgba(180, 40, 40, 0.2), 0 6px 0 #b22222;
-        }
-
-        .product-icon {
-            font-size: 4.5rem;
-            text-align: center;
-            margin: 10px 0 5px;
-            filter: drop-shadow(2px 6px 4px rgba(0, 0, 0, 0.15));
-        }
-
-        .product-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #4b2e1a;
-            text-align: center;
-            margin: 8px 0 4px;
-        }
-
-        .product-desc {
-            color: #7a5a3a;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 12px;
-            flex-grow: 1;
-        }
-
-        .product-price {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #b22222;
-            text-align: center;
-            margin: 6px 0 16px;
-        }
-
-        .product-price small {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #7a5a3a;
-        }
-
-        .btn-add {
-            background: #ffd966;
-            border: none;
-            color: #7a1f1f;
-            font-weight: 800;
-            font-size: 1.1rem;
-            padding: 14px 0;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 5px 0 #b8860b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
-            border: 2px solid #ffeaa0;
-        }
-
-        .btn-add:hover {
-            background: #ffeaa0;
-            box-shadow: 0 7px 0 #b8860b;
-            transform: scale(1.02);
-        }
-
-        .btn-add:active {
-            transform: translateY(4px);
-            box-shadow: 0 1px 0 #b8860b;
-        }
-
-        /* Cart Modal */
-        .cart-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .cart-modal.active {
-            display: flex;
-        }
-
-        .cart-content {
-            background: #fff9f0;
-            width: 90%;
-            max-width: 550px;
-            max-height: 80vh;
-            border-radius: 40px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
-            border: 4px solid #b22222;
-            animation: pop 0.2s ease;
-        }
-
-        @keyframes pop {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px dashed #b22222;
-            padding-bottom: 16px;
-            margin-bottom: 16px;
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #7a1f1f;
-        }
-
-        .cart-header i {
-            cursor: pointer;
-            font-size: 2rem;
-            transition: 0.2s;
-        }
-
-        .cart-header i:hover {
-            color: #b22222;
-            transform: scale(1.1);
-        }
-
-        .cart-items {
-            overflow-y: auto;
-            max-height: 350px;
-            padding-right: 6px;
-            margin-bottom: 16px;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #faeedc;
-            padding: 12px 16px;
-            border-radius: 30px;
-            margin-bottom: 12px;
-            border: 2px solid #e0c7a8;
-        }
-
-        .cart-item-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .cart-item-icon {
-            font-size: 2rem;
-        }
-
-        .cart-item-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #4b2e1a;
-        }
-
-        .cart-item-price {
-            font-weight: 600;
-            color: #b22222;
-            font-size: 1rem;
-        }
-
-        .cart-item-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 4px;
-        }
-
-        .cart-item-controls button {
-            background: white;
-            border: 2px solid #b22222;
-            color: #b22222;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            font-weight: 900;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.1s;
-        }
-
-        .cart-item-controls button:hover {
-            background: #b22222;
-            color: white;
-        }
-
-        .cart-item-controls span {
-            font-weight: 700;
-            min-width: 24px;
-            text-align: center;
-        }
-
-        .cart-item-total {
-            font-weight: 800;
-            color: #7a1f1f;
-            font-size: 1.2rem;
-            white-space: nowrap;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.6rem;
-            font-weight: 900;
-            padding: 16px 8px;
-            border-top: 3px dashed #b22222;
-            color: #7a1f1f;
-        }
-
-        .btn-checkout {
-            background: #b22222;
-            color: #ffd966;
-            font-size: 1.4rem;
-            font-weight: 800;
-            border: none;
-            padding: 18px;
-            border-radius: 60px;
-            cursor: pointer;
-            box-shadow: 0 8px 0 #6b1414;
-            transition: 0.15s;
-            letter-spacing: 1px;
-            margin-top: 8px;
-            border: 2px solid #ffd966;
-        }
-
-        .btn-checkout:hover {
-            background: #d43d3d;
-            box-shadow: 0 10px 0 #6b1414;
-        }
-
-        .btn-checkout:active {
-            transform: translateY(6px);
-            box-shadow: 0 2px 0 #6b1414;
-        }
-
-        .empty-cart {
-            text-align: center;
-            padding: 30px;
-            color: #9b7b5b;
-            font-size: 1.3rem;
-            font-style: italic;
-        }
-
-        /* Footer */
-        footer {
-            background: #2d1e0f;
-            color: #ffd966;
-            text-align: center;
-            padding: 2rem 5%;
-            margin-top: 3rem;
-            border-top: 8px solid #b22222;
-        }
-
-        footer p {
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .hero-text h1 { font-size: 2rem; }
-            .hero-img { font-size: 5rem; }
-            .logo { font-size: 1.5rem; }
-            .logo i { font-size: 2rem; }
-            .cart-icon { padding: 8px 14px; }
-        }
-    </style>
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .hero .container{grid-template-columns:1fr;text-align:center;gap:60px}
+  .hero p{margin-inline:auto}
+  .hero-cta,.hero-stats{justify-content:center}
+  .hero-visual{order:-1}
+  .hero-plate{width:min(320px,80%)}
+  .story{grid-template-columns:1fr;text-align:center;padding:50px 34px}
+  .story-visual{order:-1}
+  .story li{justify-content:center}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .trustbar .container{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:860px){
+  .nav{display:none}
+  .nav.mobile-open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:20px 24px;gap:4px;box-shadow:var(--shadow-lg);border-top:1px solid rgba(42,21,8,.08)}
+  .nav.mobile-open a{width:100%;padding:14px 18px}
+  .mobile-toggle{display:block}
+  .header-actions .btn-outline{display:none}
+  .topbar-info span:nth-child(2){display:none}
+}
+@media(max-width:600px){
+  .section{padding:64px 0}
+  .hero{padding:60px 0 80px}
+  .hero-stats{gap:22px;flex-wrap:wrap}
+  .hero-stat .num{font-size:1.5rem}
+  .story{padding:40px 24px}
+  .cta-banner{padding:48px 26px}
+  .footer-grid{grid-template-columns:1fr;gap:34px}
+  .product-grid{grid-template-columns:1fr}
+  .cart-drawer{width:100%}
+  .trustbar .container{grid-template-columns:1fr}
+  .trust-item{justify-content:flex-start}
+  .topbar-social{display:none}
+  .logo-text .brand{font-size:1.3rem}
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <i class="fas fa-drumstick-bite"></i>
-            <span>JOLIBI</span>
-        </div>
-        <div class="cart-icon" id="cartIcon">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Giỏ hàng</span>
-            <span class="cart-count" id="cartCount">0</span>
-        </div>
-    </header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Gà rán Jolibi<br>giòn rụm mê ly!</h1>
-            <p>Thưởng thức ngay gà rán nóng hổi, giòn tan với công thức gia truyền.</p>
-            <div class="promo">🎉 Mua 2 tặng 1 🎉</div>
-        </div>
-        <div class="hero-img">
-            🍗🔥
-        </div>
-    </section>
-
-    <!-- Menu -->
-    <section class="menu-section">
-        <h2 class="section-title">Thực đơn hôm nay</h2>
-        <div class="product-grid" id="productGrid">
-            <!-- Sản phẩm sẽ được render bằng JS -->
-        </div>
-    </section>
-
-    <!-- Cart Modal -->
-    <div class="cart-modal" id="cartModal">
-        <div class="cart-content">
-            <div class="cart-header">
-                <span>🍗 Giỏ hàng</span>
-                <i class="fas fa-times-circle" id="closeCart"></i>
-            </div>
-            <div class="cart-items" id="cartItemsContainer">
-                <!-- Cart items sẽ render ở đây -->
-            </div>
-            <div class="cart-total">
-                <span>Tổng cộng:</span>
-                <span id="cartTotalPrice">0đ</span>
-            </div>
-            <button class="btn-checkout" id="checkoutBtn">
-                <i class="fas fa-check-circle"></i> Đặt hàng ngay
-            </button>
-        </div>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-info">
+      <span><i class="fas fa-phone"></i> 1900 6611</span>
+      <span><i class="fas fa-location-dot"></i> Tìm cửa hàng gần bạn</span>
+      <span><i class="fas fa-clock"></i> 7:00 – 22:00 hằng ngày</span>
     </div>
+    <div class="topbar-social">
+      <span style="opacity:.6;font-size:.76rem">Theo dõi:</span>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Jolibi Gà Rán - Ngon không thể cưỡng lại! 🍗</p>
-        <p style="font-size: 0.9rem; margin-top: 8px;">Hotline: 1900 1234 | Địa chỉ: 123 Đường Gà, TP.HCM</p>
-    </footer>
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="#" class="logo">
+      <div class="logo-mark">🐝</div>
+      <div class="logo-text">
+        <span class="brand">Jollibee</span>
+        <span class="tagline">Việt Nam</span>
+      </div>
+    </a>
 
-    <script>
-        // Danh sách sản phẩm
-        const products = [
-            { id: 1, name: 'Gà Rán Giòn', desc: '1 miếng gà rán giòn rụm', price: 45000, icon: '🍗' },
-            { id: 2, name: 'Combo 2 Gà', desc: '2 miếng gà + khoai tây chiên', price: 89000, icon: '🍗🍟' },
-            { id: 3, name: 'Gà Sốt Cay', desc: 'Gà rán phủ sốt cay Hàn Quốc', price: 55000, icon: '🌶️🍗' },
-            { id: 4, name: 'Burger Gà', desc: 'Burger kẹp gà giòn + sốt mayo', price: 49000, icon: '🍔' },
-            { id: 5, name: 'Khoai Tây Chiên', desc: 'Khoai tây chiên giòn (L)', price: 25000, icon: '🍟' },
-            { id: 6, name: 'Combo Gia Đình', desc: '4 gà + 2 khoai + 3 nước', price: 199000, icon: '🍗🍟🥤' },
-            { id: 7, name: 'Gà Quay Mật Ong', desc: 'Gà quay mật ong thơm lừng', price: 65000, icon: '🍯🍗' },
-            { id: 8, name: 'Pepsi Lon', desc: 'Nước ngọt mát lạnh', price: 15000, icon: '🥤' }
-        ];
+    <nav class="nav" id="nav">
+      <a href="#home" class="active">Trang chủ</a>
+      <a href="#menu">Thực đơn</a>
+      <a href="#story">Về Jollibee</a>
+      <a href="#reviews">Đánh giá</a>
+      <a href="#contact">Liên hệ</a>
+    </nav>
 
-        // Giỏ hàng: mảng các object { id, name, price, icon, quantity }
-        let cart = [];
+    <div class="header-actions">
+      <a href="#menu" class="btn btn-outline"><i class="fas fa-utensils"></i> Đặt món</a>
+      <button class="cart-btn" id="cartBtn">
+        <i class="fas fa-bag-shopping"></i>
+        <span>Giỏ hàng</span>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
 
-        // DOM elements
-        const productGrid = document.getElementById('productGrid');
-        const cartModal = document.getElementById('cartModal');
-        const cartIcon = document.getElementById('cartIcon');
-        const closeCart = document.getElementById('closeCart');
-        const cartItemsContainer = document.getElementById('cartItemsContainer');
-        const cartTotalPrice = document.getElementById('cartTotalPrice');
-        const cartCountSpan = document.getElementById('cartCount');
-        const checkoutBtn = document.getElementById('checkoutBtn');
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-fire"></i> Chickenjoy — niềm vui giòn rụm</div>
+      <h1>Giòn rụm <span class="accent">Chickenjoy</span><br>vui trọn từng miếng!</h1>
+      <p>Gà rán Jollibee Chickenjoy với lớp vỏ giòn tan, thịt gà mọng nước được ướp đậm đà. Cùng Jolly Spaghetti, Burger Steak và Peach Mango Pie — bữa ăn trọn vẹn cho cả gia đình.</p>
+      <div class="hero-cta">
+        <a href="#menu" class="btn btn-primary"><i class="fas fa-bowl-food"></i> Xem thực đơn</a>
+        <a href="#story" class="btn btn-ghost"><i class="fas fa-play"></i> Về Jollibee</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">40+</div><div class="lbl">Năm thương hiệu</div></div>
+        <div class="hero-stat"><div class="num">1500+</div><div class="lbl">Cửa hàng toàn cầu</div></div>
+        <div class="hero-stat"><div class="num">4.9★</div><div class="lbl">Khách hàng yêu thích</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-plate"><span class="emoji">🍗</span></div>
+      <div class="floating-chip chip-1"><i class="fas fa-star"></i> Chickenjoy</div>
+      <div class="floating-chip chip-2"><i class="fas fa-truck-fast"></i> Giao trong 30'</div>
+      <div class="floating-chip chip-3"><i class="fas fa-fire"></i> Nóng hổi</div>
+    </div>
+  </div>
+</section>
 
-        // Render sản phẩm ra grid
-        function renderProducts() {
-            productGrid.innerHTML = products.map(p => `
-                <div class="product-card">
-                    <div class="product-icon">${p.icon}</div>
-                    <div class="product-name">${p.name}</div>
-                    <div class="product-desc">${p.desc}</div>
-                    <div class="product-price">${p.price.toLocaleString('vi-VN')}đ</div>
-                    <button class="btn-add" data-id="${p.id}">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                </div>
-            `).join('');
+<!-- TRUST BAR -->
+<div class="trustbar">
+  <div class="container">
+    <div class="trust-item"><div class="trust-icon"><i class="fas fa-truck-fast"></i></div><div><h4>Giao hàng siêu tốc</h4><p>Trong vòng 30 phút</p></div></div>
+    <div class="trust-item"><div class="trust-icon"><i class="fas fa-shield-halved"></i></div><div><h4>Chất lượng đảm bảo</h4><p>Nguyên liệu tươi mỗi ngày</p></div></div>
+    <div class="trust-item"><div class="trust-icon"><i class="fas fa-tags"></i></div><div><h4>Ưu đãi hấp dẫn</h4><p>Deal mỗi ngày</p></div></div>
+    <div class="trust-item"><div class="trust-icon"><i class="fas fa-headset"></i></div><div><h4>Hỗ trợ 24/7</h4><p>Hotline luôn sẵn sàng</p></div></div>
+  </div>
+</div>
 
-            // Gắn sự kiện cho từng nút "Thêm vào giỏ"
-            document.querySelectorAll('.btn-add').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = Number(e.currentTarget.getAttribute('data-id'));
-                    addToCart(id);
-                });
-            });
-        }
+<!-- MENU -->
+<section class="section" id="menu">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Thực đơn Jollibee</div>
+      <h2>Món ngon được yêu thích nhất</h2>
+      <p>Chickenjoy, Jolly Spaghetti, Burger Steak, Peach Mango Pie và nhiều món khác đang chờ bạn.</p>
+    </div>
+    <div class="menu-filters reveal" id="filters">
+      <button class="filter-btn active" data-cat="all">Tất cả</button>
+      <button class="filter-btn" data-cat="chicken">Chickenjoy</button>
+      <button class="filter-btn" data-cat="combo">Combo</button>
+      <button class="filter-btn" data-cat="burger">Burger</button>
+      <button class="filter-btn" data-cat="pasta">Pasta</button>
+      <button class="filter-btn" data-cat="dessert">Tráng miệng</button>
+      <button class="filter-btn" data-cat="drinks">Đồ uống</button>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
 
-        // Thêm sản phẩm vào giỏ
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
+<!-- STORY -->
+<section class="section" id="story" style="padding-top:0">
+  <div class="container">
+    <div class="story reveal">
+      <div class="story-content">
+        <div class="story-eyebrow">Về Jollibee</div>
+        <h2>Niềm vui <em>trong từng miếng gà</em></h2>
+        <p>Từ một quầy kem nhỏ tại Philippines năm 1975, Jollibee đã trở thành thương hiệu đồ ăn nhanh được yêu mến nhất châu Á. Bí quyết nằm ở hương vị đậm đà phù hợp khẩu vị người Việt và nụ cười của chú ong vui vẻ.</p>
+        <p>Chúng tôi tin rằng mỗi bữa ăn không chỉ là đồ ăn ngon, mà còn là khoảnh khắc sum vầy và niềm vui bên gia đình.</p>
+        <ul>
+          <li><i class="fas fa-check"></i> Chickenjoy giòn rụm — thương hiệu đặc trưng</li>
+          <li><i class="fas fa-check"></i> Nguyên liệu tươi, an toàn vệ sinh thực phẩm</li>
+          <li><i class="fas fa-check"></i> Hương vị được yêu thích tại hơn 30 quốc gia</li>
+        </ul>
+        <a href="#menu" class="btn btn-primary" style="background:var(--jollibee-yellow);color:var(--brown);box-shadow:0 8px 24px rgba(255,199,44,.4)"><i class="fas fa-arrow-right"></i> Khám phá thực đơn</a>
+      </div>
+      <div class="story-visual">
+        <div class="story-circle"><span class="emoji">🐝</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            const existingItem = cart.find(item => item.id === productId);
+<!-- TESTIMONIALS -->
+<section class="section" id="reviews" style="background:linear-gradient(180deg,transparent,rgba(255,199,44,.07),transparent)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Khách hàng nói gì</div>
+      <h2>Niềm vui lan tỏa</h2>
+      <p>Những đánh giá chân thật từ khách hàng yêu mến Jollibee.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Chickenjoy là chân ái! Vỏ giòn rụm mà thịt bên trong vẫn mọng nước. Combo gia đình vừa đủ cho cả nhà, các con mình mê tít.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MT</div>
+          <div><h5>Minh Tuấn</h5><span>TP.HCM</span></div>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Jolly Spaghetti sốt ngọt đậm đà đúng kiểu Philippines, ăn kèm Chickenjoy là combo hoàn hảo. Peach Mango Pie tráng miệng cực đỉnh.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">LH</div>
+          <div><h5>Lan Hương</h5><span>Hà Nội</span></div>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Burger Steak sốt nấm ăn với cơm ngon tuyệt. Giao hàng nhanh, đóng gói cẩn thận, đồ ăn vẫn nóng khi tới. Sẽ ủng hộ dài dài!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">VH</div>
+          <div><h5>Việt Hoàng</h5><span>Đà Nẵng</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    icon: product.icon,
-                    quantity: 1
-                });
-            }
+<!-- CTA -->
+<section class="section" id="contact" style="padding-top:0">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Đói bụng? Gọi Jollibee ngay!</h2>
+      <p>Đặt món online, nhận ưu đãi giảm 20% cho đơn hàng đầu tiên. Chickenjoy nóng hổi giao tận cửa trong 30 phút.</p>
+      <a href="#menu" class="btn"><i class="fas fa-bag-shopping"></i> Đặt món ngay</a>
+    </div>
+  </div>
+</section>
 
-            updateCartUI();
-            // Hiệu ứng nhẹ cho biết đã thêm
-            cartIcon.style.transform = 'scale(1.1)';
-            setTimeout(() => cartIcon.style.transform = '', 150);
-        }
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">🐝</div>
+          <div class="logo-text">
+            <span class="brand">Jollibee</span>
+            <span class="tagline">Việt Nam</span>
+          </div>
+        </a>
+        <p>Thương hiệu đồ ăn nhanh được yêu mến tại châu Á với Chickenjoy giòn rụm và nụ cười của chú ong vui vẻ.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Khám phá</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Trang chủ</a></li>
+          <li><a href="#menu">Thực đơn</a></li>
+          <li><a href="#story">Về Jollibee</a></li>
+          <li><a href="#reviews">Đánh giá</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <ul class="footer-links">
+          <li><a href="#">Chính sách giao hàng</a></li>
+          <li><a href="#">Chính sách đổi trả</a></li>
+          <li><a href="#">Câu hỏi thường gặp</a></li>
+          <li><a href="#">Tuyển dụng</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-location-dot"></i> Tầng 3, Vincom Center, Q.1, TP.HCM</li>
+          <li><i class="fas fa-phone"></i> Hotline: 1900 6611</li>
+          <li><i class="fas fa-envelope"></i> hello@jollibee.vn</li>
+          <li><i class="fas fa-clock"></i> 7:00 – 22:00 hằng ngày</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Jollibee Việt Nam — Trang demo phi thương mại.</span>
+      <span>Made with 🐝 &amp; 🍗</span>
+    </div>
+  </div>
+</footer>
 
-        // Cập nhật giao diện giỏ hàng (số lượng trên icon, render modal, tổng tiền)
-        function updateCartUI() {
-            // Cập nhật số lượng hiển thị trên icon
-            const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCountSpan.textContent = totalQuantity;
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3><i class="fas fa-bag-shopping"></i> Giỏ hàng</h3>
+    <button class="cart-close" id="cartClose"><i class="fas fa-xmark"></i></button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot">
+    <div class="cart-summary-row"><span>Tạm tính</span><span id="subtotal">0đ</span></div>
+    <div class="cart-summary-row"><span>Phí giao hàng</span><span id="shipping">Miễn phí</span></div>
+    <div class="cart-summary-row total"><span>Tổng cộng</span><span id="grandTotal">0đ</span></div>
+    <button class="checkout-btn" id="checkoutBtn" disabled><i class="fas fa-lock"></i> Tiến hành thanh toán</button>
+  </div>
+</aside>
 
-            // Render danh sách items trong modal
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `<div class="empty-cart">🍽️ Giỏ hàng trống, mời bạn chọn món!</div>`;
-            } else {
-                cartItemsContainer.innerHTML = cart.map(item => `
-                    <div class="cart-item" data-id="${item.id}">
-                        <div class="cart-item-info">
-                            <span class="cart-item-icon">${item.icon}</span>
-                            <div>
-                                <div class="cart-item-name">${item.name}</div>
-                                <div class="cart-item-price">${item.price.toLocaleString('vi-VN')}đ</div>
-                                <div class="cart-item-controls">
-                                    <button class="decrease-qty" data-id="${item.id}">−</button>
-                                    <span>${item.quantity}</span>
-                                    <button class="increase-qty" data-id="${item.id}">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-item-total">
-                            ${(item.price * item.quantity).toLocaleString('vi-VN')}đ
-                        </div>
-                    </div>
-                `).join('');
+<!-- TOAST -->
+<div class="toast-wrap" id="toastWrap"></div>
 
-                // Gắn sự kiện tăng/giảm số lượng
-                document.querySelectorAll('.decrease-qty').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const id = Number(e.currentTarget.getAttribute('data-id'));
-                        updateQuantity(id, -1);
-                    });
-                });
+<script>
+/* ========== DATA ========== */
+const PRODUCTS = [
+  { id:1, name:'Chickenjoy 1 Miếng', cat:'chicken', catLabel:'Chickenjoy', desc:'Gà rán giòn rụm đặc trưng, thịt mọng nước, vỏ giòn tan.', price:49000, oldPrice:59000, icon:'🍗', rating:4.9, tag:'Best Seller', tagType:'hot' },
+  { id:2, name:'Chickenjoy Combo 2 Miếng', cat:'combo', catLabel:'Combo', desc:'2 miếng Chickenjoy + khoai tây chiên + nước ngọt.', price:99000, oldPrice:125000, icon:'🍗🍟', rating:4.9, tag:'Tiết kiệm', tagType:'' },
+  { id:3, name:'Chickenjoy Spicy', cat:'chicken', catLabel:'Chickenjoy', desc:'Chickenjoy phiên bản cay nồng, đậm đà hương vị.', price:55000, oldPrice:null, icon:'🌶️🍗', rating:4.8, tag:'Hot', tagType:'hot' },
+  { id:4, name:'Jolly Spaghetti', cat:'pasta', catLabel:'Pasta', desc:'Mì Ý sốt cà chua ngọt đặc trưng kèm xúc xích và phô mai.', price:45000, oldPrice:null, icon:'🍝', rating:4.8, tag:null, tagType:'' },
+  { id:5, name:'Burger Steak', cat:'burger', catLabel:'Burger', desc:'Bánh burger bò sốt nấm đậm đà, ăn kèm cơm trắng.', price:52000, oldPrice:62000, icon:'🍔', rating:4.7, tag:'Mới', tagType:'new' },
+  { id:6, name:'Combo Gia Đình Jollibee', cat:'combo', catLabel:'Combo', desc:'4 Chickenjoy + 2 Spaghetti + 2 khoai + 4 nước. Đủ cho cả nhà.', price:299000, oldPrice:380000, icon:'🍗🍝🍟', rating:5.0, tag:'Best Value', tagType:'hot' },
+  { id:7, name:'Chickenjoy Bucket 6 Miếng', cat:'chicken', catLabel:'Chickenjoy', desc:'Xô 6 miếng Chickenjoy giòn rụm cho cả nhóm bạn.', price:259000, oldPrice:300000, icon:'🪣🍗', rating:4.9, tag:'Premium', tagType:'new' },
+  { id:8, name:'Peach Mango Pie', cat:'dessert', catLabel:'Tráng miệng', desc:'Bánh pie nhân đào xoài giòn tan, ngọt ngào khó cưỡng.', price:29000, oldPrice:null, icon:'🥧', rating:4.9, tag:'Yêu thích', tagType:'hot' },
+  { id:9, name:'Burger Gà Giòn', cat:'burger', catLabel:'Burger', desc:'Burger kẹp gà giòn, rau tươi và sốt mayo đặc biệt.', price:49000, oldPrice:null, icon:'🍔🍗', rating:4.7, tag:null, tagType:'' },
+  { id:10, name:'Khoai Tây Chiên (L)', cat:'sides', catLabel:'Món phụ', desc:'Khoai tây chiên giòn rụm, vàng đều, rắc muối biển.', price:29000, oldPrice:null, icon:'🍟', rating:4.8, tag:null, tagType:'' },
+  { id:11, name:'Trà Đào Jollibee', cat:'drinks', catLabel:'Đồ uống', desc:'Trà đào thơm mát, giải nhiệt tức thì.', price:25000, oldPrice:null, icon:'🍑🥤', rating:4.7, tag:null, tagType:'' },
+  { id:12, name:'Pepsi Lon (330ml)', cat:'drinks', catLabel:'Đồ uống', desc:'Nước ngọt Pepsi mát lạnh, sảng khoái.', price:18000, oldPrice:null, icon:'🥤', rating:4.6, tag:null, tagType:'' }
+];
 
-                document.querySelectorAll('.increase-qty').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const id = Number(e.currentTarget.getAttribute('data-id'));
-                        updateQuantity(id, 1);
-                    });
-                });
-            }
+const SHIPPING_FEE = 15000;
+const FREE_SHIP_THRESHOLD = 150000;
 
-            // Tính tổng tiền
-            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            cartTotalPrice.textContent = total.toLocaleString('vi-VN') + 'đ';
-        }
+/* ========== STATE ========== */
+let cart = JSON.parse(localStorage.getItem('jollibee_cart') || '[]');
+let activeFilter = 'all';
+let favorites = new Set(JSON.parse(localStorage.getItem('jollibee_fav') || '[]'));
 
-        // Tăng/giảm số lượng sản phẩm trong giỏ
-        function updateQuantity(productId, delta) {
-            const item = cart.find(item => item.id === productId);
-            if (!item) return;
+/* ========== HELPERS ========== */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const money = n => n.toLocaleString('vi-VN') + 'đ';
+const saveCart = () => localStorage.setItem('jollibee_cart', JSON.stringify(cart));
+const saveFav = () => localStorage.setItem('jollibee_fav', JSON.stringify([...favorites]));
 
-            const newQuantity = item.quantity + delta;
+/* ========== RENDER PRODUCTS ========== */
+function renderProducts() {
+  const grid = $('#productGrid');
+  const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeFilter);
+  if (list.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-muted)">Không có món nào trong danh mục này.</div>`;
+    return;
+  }
+  grid.innerHTML = list.map((p, i) => `
+    <article class="product-card" style="animation-delay:${i * 0.05}s">
+      <div class="product-media">
+        ${p.tag ? `<span class="product-tag ${p.tagType}">${p.tag}</span>` : ''}
+        <button class="product-fav ${favorites.has(p.id)?'liked':''}" data-fav="${p.id}" aria-label="Yêu thích">
+          <i class="${favorites.has(p.id)?'fas':'far'} fa-heart"></i>
+        </button>
+        <span class="emoji">${p.icon}</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.catLabel}</div>
+        <h3 class="product-name">${p.name}</h3>
+        <p class="product-desc">${p.desc}</p>
+        <div class="product-rating">
+          <span class="stars">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))}</span>
+          <span>${p.rating} (${Math.floor(Math.random()*80)+20})</span>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">
+            <span class="now">${money(p.price)}</span>
+            ${p.oldPrice ? `<span class="old">${money(p.oldPrice)}</span>` : ''}
+          </div>
+          <button class="add-btn" data-add="${p.id}" aria-label="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+  bindProductEvents();
+}
 
-            if (newQuantity <= 0) {
-                // Xóa sản phẩm khỏi giỏ
-                cart = cart.filter(item => item.id !== productId);
-            } else {
-                item.quantity = newQuantity;
-            }
+function bindProductEvents() {
+  $$('[data-add]').forEach(btn => btn.addEventListener('click', () => addToCart(+btn.dataset.add)));
+  $$('[data-fav]').forEach(btn => btn.addEventListener('click', () => toggleFav(+btn.dataset.fav, btn)));
+}
 
-            updateCartUI();
-        }
+function toggleFav(id, btn) {
+  if (favorites.has(id)) { favorites.delete(id); btn.classList.remove('liked'); btn.innerHTML = '<i class="far fa-heart"></i>'; }
+  else { favorites.add(id); btn.classList.add('liked'); btn.innerHTML = '<i class="fas fa-heart"></i>'; }
+  saveFav();
+}
 
-        // Mở/đóng modal giỏ hàng
-        function openCartModal() {
-            cartModal.classList.add('active');
-            updateCartUI(); // đảm bảo dữ liệu mới nhất
-        }
+/* ========== FILTERS ========== */
+$$('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.cat;
+    renderProducts();
+  });
+});
 
-        function closeCartModal() {
-            cartModal.classList.remove('active');
-        }
+/* ========== CART ========== */
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const item = cart.find(x => x.id === id);
+  if (item) item.qty++;
+  else cart.push({ id: p.id, name: p.name, price: p.price, icon: p.icon, qty: 1 });
+  saveCart();
+  updateCartUI();
+  bumpBadge();
+  showToast(`<i class="fas fa-circle-check"></i> Đã thêm "${p.name}" vào giỏ`);
+}
 
-        // Xử lý đặt hàng
-        function handleCheckout() {
-            if (cart.length === 0) {
-                alert('Giỏ hàng của bạn đang trống. Hãy chọn món trước nhé!');
-                return;
-            }
+function changeQty(id, delta) {
+  const item = cart.find(x => x.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(x => x.id !== id);
+  saveCart();
+  updateCartUI();
+}
 
-            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            const orderSummary = cart.map(item => 
-                `${item.name} x${item.quantity} = ${(item.price * item.quantity).toLocaleString('vi-VN')}đ`
-            ).join('\n');
+function removeItem(id) {
+  cart = cart.filter(x => x.id !== id);
+  saveCart();
+  updateCartUI();
+  showToast('<i class="fas fa-trash"></i> Đã xóa món khỏi giỏ');
+}
 
-            alert(`✅ Đặt hàng thành công!\n\n${orderSummary}\n\nTổng cộng: ${total.toLocaleString('vi-VN')}đ\n\nCảm ơn bạn đã ủng hộ Jolibi! 🍗`);
+function updateCartUI() {
+  const totalQty = cart.reduce((s, x) => s + x.qty, 0);
+  $('#cartBadge').textContent = totalQty;
 
-            // Xóa giỏ hàng sau khi đặt
-            cart = [];
-            updateCartUI();
-            closeCartModal();
-        }
+  const body = $('#cartBody');
+  if (cart.length === 0) {
+    body.innerHTML = `
+      <div class="cart-empty">
+        <span class="big-emoji">🛒</span>
+        <h4>Giỏ hàng đang trống</h4>
+        <p>Hãy chọn vài món Chickenjoy ngon lành nhé!</p>
+      </div>`;
+    $('#subtotal').textContent = '0đ';
+    $('#shipping').textContent = '—';
+    $('#grandTotal').textContent = '0đ';
+    $('#checkoutBtn').disabled = true;
+    return;
+  }
 
-        // Khởi tạo các sự kiện
-        function init() {
-            renderProducts();
-            updateCartUI();
+  body.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-media">${item.icon}</div>
+      <div class="cart-item-main">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${money(item.price)}</div>
+        <div class="cart-qty">
+          <button class="qty-btn" data-minus="${item.id}">−</button>
+          <span>${item.qty}</span>
+          <button class="qty-btn" data-plus="${item.id}">+</button>
+        </div>
+      </div>
+      <div class="cart-item-right">
+        <div class="cart-item-total">${money(item.price * item.qty)}</div>
+        <button class="remove-item" data-remove="${item.id}"><i class="fas fa-xmark"></i> Xóa</button>
+      </div>
+    </div>
+  `).join('');
 
-            // Mở modal khi click icon giỏ hàng
-            cartIcon.addEventListener('click', openCartModal);
+  const subtotal = cart.reduce((s, x) => s + x.price * x.qty, 0);
+  const shipping = subtotal >= FREE_SHIP_THRESHOLD ? 0 : SHIPPING_FEE;
+  const total = subtotal + shipping;
 
-            // Đóng modal
-            closeCart.addEventListener('click', closeCartModal);
+  $('#subtotal').textContent = money(subtotal);
+  $('#shipping').textContent = shipping === 0 ? 'Miễn phí 🎉' : money(shipping);
+  $('#grandTotal').textContent = money(total);
+  $('#checkoutBtn').disabled = false;
 
-            // Click ra ngoài modal cũng đóng
-            cartModal.addEventListener('click', (e) => {
-                if (e.target === cartModal) {
-                    closeCartModal();
-                }
-            });
+  $$('[data-plus]').forEach(b => b.onclick = () => changeQty(+b.dataset.plus, 1));
+  $$('[data-minus]').forEach(b => b.onclick = () => changeQty(+b.dataset.minus, -1));
+  $$('[data-remove]').forEach(b => b.onclick = () => removeItem(+b.dataset.remove));
+}
 
-            // Nút đặt hàng
-            checkoutBtn.addEventListener('click', handleCheckout);
-        }
+function bumpBadge() {
+  const badge = $('#cartBadge');
+  badge.classList.add('bump');
+  setTimeout(() => badge.classList.remove('bump'), 300);
+}
 
-        // Chạy khi DOM load xong
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+/* ========== CART DRAWER ========== */
+function openCart() { $('#cartDrawer').classList.add('open'); $('#cartOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCart() { $('#cartDrawer').classList.remove('open'); $('#cartOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+$('#cartBtn').addEventListener('click', openCart);
+$('#cartClose').addEventListener('click', closeCart);
+$('#cartOverlay').addEventListener('click', closeCart);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+/* ========== CHECKOUT ========== */
+$('#checkoutBtn').addEventListener('click', () => {
+  if (cart.length === 0) return;
+  const subtotal = cart.reduce((s, x) => s + x.price * x.qty, 0);
+  const shipping = subtotal >= FREE_SHIP_THRESHOLD ? 0 : SHIPPING_FEE;
+  const total = subtotal + shipping;
+  const orderLines = cart.map(x => `  • ${x.name} × ${x.qty} = ${money(x.price*x.qty)}`).join('\n');
+  alert(`✅ ĐẶT HÀNG THÀNH CÔNG!\n\n${orderLines}\n\nTạm tính: ${money(subtotal)}\nPhí giao: ${shipping===0?'Miễn phí':money(shipping)}\n─────────────\nTỔNG: ${money(total)}\n\nCảm ơn bạn đã ủng hộ Jollibee! 🐝🍗`);
+  cart = [];
+  saveCart();
+  updateCartUI();
+  closeCart();
+  showToast('<i class="fas fa-truck-fast"></i> Đơn hàng đang được chuẩn bị!');
+});
+
+/* ========== TOAST ========== */
+function showToast(html) {
+  const wrap = $('#toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = html;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 300); }, 2600);
+}
+
+/* ========== HEADER SCROLL ========== */
+window.addEventListener('scroll', () => {
+  $('#header').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* ========== NAV ========== */
+$$('.nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    $$('.nav a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+    $('#nav').classList.remove('mobile-open');
+  });
+});
+$('#mobileToggle').addEventListener('click', () => $('#nav').classList.toggle('mobile-open'));
+
+/* ========== REVEAL ========== */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+$$('.reveal').forEach(el => io.observe(el));
+
+/* ========== INIT ========== */
+renderProducts();
+updateCartUI();
+</script>
 </body>
 </html>
