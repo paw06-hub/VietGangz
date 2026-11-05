@@ -45,7 +45,7 @@
     .navbar {
       position: fixed;
       top: 0; width: 100%;
-      padding: 1.5rem 4rem;
+      padding: 1.2rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -65,21 +65,18 @@
       gap: 10px;
       cursor: pointer;
     }
-    
     .logo-text span { color: var(--accent); }
     
-    .nav-links { display: flex; gap: 2.5rem; }
-    
+    .nav-links { display: flex; gap: 2rem; }
     .nav-links a {
       font-size: 0.85rem;
       font-weight: 700;
       transition: color 0.3s;
+      cursor: pointer;
     }
-    
     .nav-links a:hover { color: var(--accent); }
     
     .nav-actions { display: flex; gap: 1rem; align-items: center; }
-    
     .btn-nav {
       padding: 0.6rem 1.5rem;
       border: 1px solid var(--text-main);
@@ -90,62 +87,46 @@
       cursor: pointer;
       transition: all 0.3s;
     }
-    
     .btn-nav:hover { background: var(--text-main); color: var(--bg); }
     .btn-nav.primary { background: var(--accent); border-color: var(--accent); }
     .btn-nav.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
-    /* User Info (Khi đã đăng nhập) */
+    /* User Info Navbar */
     .user-profile {
       display: flex;
       align-items: center;
       gap: 1rem;
-    }
-    .user-name {
-      color: var(--accent);
-      font-weight: 800;
-      font-family: 'Orbitron', sans-serif;
-    }
-    .btn-logout {
-      color: var(--text-muted);
       cursor: pointer;
-      font-size: 0.85rem;
-      transition: color 0.3s;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: border-color 0.3s;
     }
-    .btn-logout:hover { color: var(--accent); }
+    .user-profile:hover { border-color: var(--accent); }
+    .user-avatar-nav { width: 30px; height: 30px; border-radius: 50%; background: #333; display: flex; justify-content: center; align-items: center; }
+    .user-name { color: var(--text-main); font-weight: 800; font-size: 0.9rem; }
+    .nav-balance { color: #00ff00; font-weight: 800; font-size: 0.9rem; margin-left: 10px; font-family: 'Orbitron', sans-serif;}
 
-    /* ===== HERO SECTION ===== */
+    /* ===== CÁC TRANG (ROUTING) ===== */
+    .page { display: none; min-height: 100vh; padding-top: 100px; animation: fadeIn 0.4s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ===== TRANG CHỦ (HERO) ===== */
     .hero {
-      height: 100vh;
+      height: calc(100vh - 100px);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      position: relative;
       background: linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,0.95)), url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
       padding: 0 2rem;
     }
-    
-    .hero h1 {
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 1s ease;
-    }
-    
+    .hero h1 { font-size: clamp(3rem, 7vw, 6.5rem); line-height: 1.1; margin-bottom: 1.5rem; }
     .hero h1 span { color: var(--accent); }
-    
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 750px;
-      color: #cccccc;
-      margin-bottom: 3rem;
-      animation: fadeInUp 1s ease 0.2s both;
-    }
-    
-    .hero-buttons { display: flex; gap: 1.5rem; animation: fadeInUp 1s ease 0.4s both; }
-    
+    .hero p { font-size: 1.2rem; max-width: 750px; color: #ccc; margin-bottom: 3rem; }
+    .hero-buttons { display: flex; gap: 1.5rem; }
     .btn-large {
       padding: 1.2rem 3rem;
       font-size: 1rem;
@@ -155,170 +136,312 @@
       transition: all 0.3s;
       border: none;
     }
-    
     .btn-large.primary { background: var(--accent); color: white; box-shadow: 0 0 20px rgba(255, 42, 42, 0.4); }
     .btn-large.primary:hover { background: var(--accent-hover); transform: translateY(-3px); }
     .btn-large.secondary { background: transparent; border: 2px solid white; color: white; }
     .btn-large.secondary:hover { background: white; color: black; transform: translateY(-3px); }
 
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* ===== MODAL FORM ĐĂNG NHẬP / ĐĂNG KÝ ===== */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
+    /* ===== TRANG PROFILE ===== */
+    .profile-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .profile-header {
       display: flex;
-      justify-content: center;
       align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
-    }
-    
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .modal-box {
+      gap: 2rem;
       background: var(--bg-card);
-      border: 1px solid var(--border);
       padding: 3rem;
-      width: 100%;
-      max-width: 450px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      margin-bottom: 2rem;
       position: relative;
-      transform: translateY(20px);
-      transition: transform 0.3s;
+    }
+    .avatar-box {
+      width: 120px; height: 120px;
+      background: #1a1a1a;
+      border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 4rem; color: var(--accent);
+      border: 2px solid var(--border);
+      position: relative;
+    }
+    .edit-avatar-btn {
+      position: absolute; bottom: 0; right: 0;
+      background: var(--accent); color: white;
+      width: 35px; height: 35px; border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      cursor: pointer; border: none; font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+    .edit-avatar-btn:hover { transform: scale(1.1); }
+    
+    .profile-info h2 { font-size: 2.5rem; margin-bottom: 0.2rem; display:flex; align-items:center; gap:10px;}
+    .profile-info p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .badge-vip {
+      display: inline-block; padding: 0.2rem 0.8rem;
+      background: rgba(255, 42, 42, 0.1); border: 1px solid var(--accent);
+      color: var(--accent); font-size: 0.75rem; font-weight: 700; border-radius: 4px;
+    }
+    .admin-badge {
+      display: inline-block; padding: 0.2rem 0.8rem;
+      background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00;
+      color: #00ff00; font-size: 0.75rem; font-weight: 700; border-radius: 4px; margin-left: 10px;
     }
     
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .stat-box {
+      background: var(--bg-card); padding: 2rem; text-align: center;
+      border: 1px solid var(--border);
+    }
+    .stat-box h3 { font-size: 2rem; color: white; margin-bottom: 0.5rem; }
+    .stat-box p { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ===== TIN TỨC ===== */
+    .news-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .news-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 4px solid var(--accent); padding: 2rem; margin-bottom: 1.5rem;
+    }
+    .news-date { color: var(--accent); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .news-title { font-size: 1.4rem; margin-bottom: 1rem; color: white; }
+    .news-content { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* ===== CỬA HÀNG (SHOP) ===== */
+    .shop-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .shop-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 2rem; text-align: center; transition: 0.3s;
+    }
+    .shop-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .shop-card i { font-size: 3rem; color: var(--accent); margin-bottom: 1rem; }
+    .shop-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .shop-card p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .shop-price { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #00ff00; margin-bottom: 1rem; }
+    .btn-buy {
+      width: 100%; padding: 0.8rem; background: var(--accent); border: none; color: white;
+      font-family: 'Orbitron', sans-serif; font-weight: 700; cursor: pointer; transition: 0.3s;
+    }
+    .btn-buy:hover { background: var(--accent-hover); }
+
+    /* ===== BẢNG XẾP HẠNG ===== */
+    .leader-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .leader-table { width: 100%; border-collapse: collapse; background: var(--bg-card); }
+    .leader-table th, .leader-table td { padding: 1.2rem; border-bottom: 1px solid var(--border); text-align: left; }
+    .leader-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+    .rank-1 td { color: #ffd700; font-weight: 800; font-size: 1.1rem; }
+    .rank-2 td { color: #c0c0c0; font-weight: 800; }
+    .rank-3 td { color: #cd7f32; font-weight: 800; }
+
+    /* ===== ADMIN ===== */
+    .admin-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .admin-box { background: var(--bg-card); border: 1px solid var(--border); padding: 2rem; margin-bottom: 2rem; }
+    .admin-box input, .admin-box textarea {
+      width: 100%; padding: 1rem; margin-bottom: 1rem; background: #1a1a1a;
+      border: 1px solid var(--border); color: white; font-family: inherit; outline: none;
+    }
+    .admin-box textarea { height: 100px; resize: none; }
+
+    /* ===== MODAL FORM ===== */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 3rem; width: 100%; max-width: 450px;
+      position: relative; transform: translateY(20px); transition: transform 0.3s;
+    }
     .modal-overlay.active .modal-box { transform: translateY(0); }
-    
     .close-btn {
-      position: absolute;
-      top: 15px; right: 20px;
-      font-size: 1.5rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      background: none; border: none;
-      transition: color 0.3s;
+      position: absolute; top: 15px; right: 20px;
+      font-size: 1.5rem; color: var(--text-muted); cursor: pointer;
+      background: none; border: none; transition: color 0.3s;
     }
     .close-btn:hover { color: var(--accent); }
-    
-    .auth-tabs {
-      display: flex;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    
+    .auth-tabs { display: flex; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
     .auth-tab {
-      flex: 1;
-      padding: 1rem;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
+      flex: 1; padding: 1rem; background: none; border: none;
+      color: var(--text-muted); font-family: 'Orbitron', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s;
     }
-    
-    .auth-tab.active {
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-    }
-    
+    .auth-tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
     .form-group { margin-bottom: 1.5rem; }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600; }
     .form-group input {
-      width: 100%;
-      padding: 1rem;
-      background: #1a1a1a;
-      border: 1px solid var(--border);
-      color: white;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: border-color 0.3s;
+      width: 100%; padding: 1rem; background: #1a1a1a; border: 1px solid var(--border);
+      color: white; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.3s;
     }
     .form-group input:focus { border-color: var(--accent); }
-    
     .btn-submit {
-      width: 100%;
-      padding: 1rem;
-      background: var(--accent);
-      border: none;
-      color: white;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
-      font-weight: 900;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-top: 1rem;
+      width: 100%; padding: 1rem; background: var(--accent); border: none; color: white;
+      font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; cursor: pointer;
+      transition: background 0.3s; margin-top: 1rem;
     }
     .btn-submit:hover { background: var(--accent-hover); }
-
     .msg-error { color: #ff4c4c; font-size: 0.85rem; margin-bottom: 1rem; display: none; text-align: center; }
     .msg-success { color: #00ff00; font-size: 0.85rem; margin-bottom: 1rem; display: none; text-align: center; }
 
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .profile-header { flex-direction: column; text-align: center; padding: 2rem; }
+      .profile-stats { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; width: 100%; }
+      .btn-large { width: 100%; }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="logo-text" onclick="window.scrollTo(0,0)">GTA <span>NETWORK</span></div>
+    <div class="logo-text" onclick="navigate('home')">VIET<span>GANGZ</span></div>
     <div class="nav-links">
-      <a href="#launcher">Tải xuống</a>
-      <a href="#lifestyle">Lối sống</a>
-      <a href="#world">Thế giới</a>
-      <a href="#community">Cộng đồng</a>
+      <a onclick="navigate('news')">Tin Tức</a>
+      <a onclick="navigate('shop')">Cửa Hàng</a>
+      <a onclick="navigate('leaderboard')">Xếp Hạng</a>
+      <a onclick="navigate('profile')">Hồ Sơ</a>
     </div>
-    
-    <!-- KHU VỰC ĐĂNG NHẬP (Sẽ thay đổi bằng JS) -->
-    <div class="nav-actions" id="auth-area">
-      <button class="btn-nav" onclick="openAuthModal('login')">Đăng nhập</button>
-      <button class="btn-nav primary" onclick="openAuthModal('register')">Đăng ký</button>
-    </div>
+    <div class="nav-actions" id="auth-area"></div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <header class="hero">
-    <h1>VietGangz <br><span>Roleplay</span></h1>
-    <p>Trò chơi trực tuyến nhiều người chơi với một thế giới mở rộng lớn trong đó Bạn có thể trở thành bất cứ ai bạn muốn!</p>
-    <div class="hero-buttons">
-      <button class="btn-large primary">Tải Launcher</button>
-      <button class="btn-large secondary">Tham gia Discord</button>
-    </div>
-  </header>
+  <!-- ================= TRANG CHỦ ================= -->
+  <div id="page-home" class="page active">
+    <header class="hero">
+      <h1>VietGangz <br><span>Roleplay</span></h1>
+      <p>Trò chơi trực tuyến nhiều người chơi với một thế giới mở rộng lớn trong đó Bạn có thể trở thành bất cứ ai bạn muốn!</p>
+      <div class="hero-buttons">
+        <button class="btn-large primary">Tải Launcher</button>
+        <button class="btn-large secondary" onclick="navigate('news')">Xem Tin Tức</button>
+      </div>
+    </header>
+  </div>
 
-  <!-- MODAL FORM (ẨN MẶC ĐỊNH) -->
+  <!-- ================= TRANG TIN TỨC ================= -->
+  <div id="page-news" class="page">
+    <div class="news-container">
+      <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">Bảng Tin & Cập Nhật</h2>
+      <div id="news-list"></div>
+    </div>
+  </div>
+
+  <!-- ================= TRANG CỬA HÀNG ================= -->
+  <div id="page-shop" class="page">
+    <div class="shop-container">
+      <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">Cửa Hàng Vật Phẩm</h2>
+      <div class="shop-grid" id="shop-list"></div>
+    </div>
+  </div>
+
+  <!-- ================= TRANG BẢNG XẾP HẠNG ================= -->
+  <div id="page-leaderboard" class="page">
+    <div class="leader-container">
+      <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">Bảng Xếp Hạng Đại Gia</h2>
+      <table class="leader-table">
+        <thead>
+          <tr>
+            <th>Hạng</th>
+            <th>Tên Nhân Vật</th>
+            <th>Cấp Độ</th>
+            <th>Tài Sản ($)</th>
+          </tr>
+        </thead>
+        <tbody id="leader-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================= TRANG PROFILE ================= -->
+  <div id="page-profile" class="page">
+    <div class="profile-container">
+      <div class="profile-header">
+        <div class="avatar-box" id="profileAvatar">
+          <i class="fas fa-user-secret"></i>
+          <button class="edit-avatar-btn" onclick="changeAvatar()" title="Đổi Avatar"><i class="fas fa-pen"></i></button>
+        </div>
+        <div class="profile-info">
+          <h2 id="profileName">Tên Nhân Vật</h2>
+          <p id="profileEmail"><i class="fas fa-envelope"></i> email@example.com</p>
+          <p><i class="fas fa-calendar-alt"></i> Tham gia: <span id="profileDate"></span></p>
+          <div id="profileBadges"></div>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-box">
+          <h3 id="profileLevel">1</h3>
+          <p>Cấp độ</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="profileMoney">$0</h3>
+          <p>Tài khoản ngân hàng</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="profileHours">0</h3>
+          <p>Giờ chơi</p>
+        </div>
+      </div>
+
+      <!-- Nạp tiền -->
+      <div class="admin-box" style="text-align: center; border-left-color: #00ff00;">
+        <h3 style="margin-bottom: 1rem; color: #00ff00;"><i class="fas fa-wallet"></i> Nạp Tiền Vào Tài Khoản</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Nạp tiền (giả lập) để mua vật phẩm trong Cửa Hàng.</p>
+        <button class="btn-buy" onclick="openDepositModal()" style="max-width: 300px; margin: 0 auto;">Nạp Ngay $10,000</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TRANG ADMIN ================= -->
+  <div id="page-admin" class="page">
+    <div class="admin-container">
+      <h2 style="margin-bottom: 2rem; color: #00ff00;"><i class="fas fa-shield-alt"></i> Quản Trị Hệ Thống</h2>
+      
+      <div class="admin-box">
+        <h3 style="margin-bottom: 1rem;">Đăng Tin Tức Mới</h3>
+        <input type="text" id="newsTitle" placeholder="Tiêu đề tin tức...">
+        <textarea id="newsContent" placeholder="Nội dung tin tức..."></textarea>
+        <button class="btn-buy" onclick="postNews()" style="width: auto; padding: 0.8rem 2rem;">Đăng Bài</button>
+      </div>
+
+      <div class="admin-box">
+        <h3 style="margin-bottom: 1rem;">Danh Sách Người Chơi</h3>
+        <table class="leader-table">
+          <thead>
+            <tr>
+              <th>Tài Khoản</th>
+              <th>Email</th>
+              <th>Số Dư</th>
+              <th>Hành Động</th>
+            </tr>
+          </thead>
+          <tbody id="admin-user-list"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL AUTH -->
   <div class="modal-overlay" id="authModal">
     <div class="modal-box">
       <button class="close-btn" onclick="closeAuthModal()">&times;</button>
-      
       <div class="auth-tabs">
         <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Đăng Nhập</button>
         <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Đăng Ký</button>
       </div>
+      <div class="msg-error" id="msgError"></div>
+      <div class="msg-success" id="msgSuccess"></div>
 
-      <div id="message-box">
-        <div class="msg-error" id="msgError"></div>
-        <div class="msg-success" id="msgSuccess"></div>
-      </div>
-
-      <!-- FORM ĐĂNG NHẬP -->
       <form id="form-login" onsubmit="handleLogin(event)">
         <div class="form-group">
-          <label>Tên tài khoản (Username)</label>
+          <label>Tên tài khoản</label>
           <input type="text" id="loginUser" required placeholder="Nhập tên tài khoản...">
         </div>
         <div class="form-group">
@@ -328,7 +451,6 @@
         <button type="submit" class="btn-submit">Vào Thành Phố</button>
       </form>
 
-      <!-- FORM ĐĂNG KÝ -->
       <form id="form-register" style="display: none;" onsubmit="handleRegister(event)">
         <div class="form-group">
           <label>Tên tài khoản</label>
@@ -344,73 +466,225 @@
         </div>
         <button type="submit" class="btn-submit">Tạo Tài Khoản</button>
       </form>
-
     </div>
   </div>
 
-  <!-- CÁC SECTION KHÁC (Rút gọn) -->
-  <section id="launcher" style="padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border);">
-    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Launcher</h2>
-    <p style="color: var(--text-muted);">Tải game để tham gia cùng hàng ngàn người chơi khác.</p>
-  </section>
-  <section id="lifestyle" style="padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid var(--border);">
-    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Lối sống</h2>
-    <p style="color: var(--text-muted);">Tự do làm bất cứ điều gì bạn muốn trong thành phố.</p>
-  </section>
-
-  <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem;">
-    <p>&copy; 2026 Lê Trung. Bản quyền thuộc về cộng đồng.</p>
+  <!-- FOOTER -->
+  <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border);">
+    <p>&copy; 2026 Lê Trung. Bản quyền thuộc về cộng đồng VietGangz.</p>
   </footer>
 
   <script>
-    /* ================= LOGIC XÁC THỰC TÀI KHOẢN ================= */
+    /* ================= DATA KHỞI TẠO ================= */
+    // Tài khoản (Mặc định có 1 Admin)
+    let users = JSON.parse(localStorage.getItem('vietgangz_users')) || [
+      { id: 1, username: 'admin', email: 'admin@vietgangz.vn', password: 'admin123', joinDate: '01/01/2026', level: 99, money: 9999999, hours: 999, role: 'admin', avatar: '<i class="fas fa-user-shield"></i>' }
+    ];
+    
+    // Tin tức
+    let news = JSON.parse(localStorage.getItem('vietgangz_news')) || [
+      { id: 1, date: '05/11/2026', title: 'Chào mừng đến với VietGangz Roleplay!', content: 'Máy chủ chính thức mở cửa. Hãy tải launcher và tham gia cùng hàng ngàn người chơi khác.' }
+    ];
 
-    // Khởi tạo mảng User nếu chưa có trong bộ nhớ trình duyệt
-    let users = JSON.parse(localStorage.getItem('gta_users')) || [];
+    // Vật phẩm Shop
+    const shopItems = [
+      { id: 1, name: 'Gói Khởi Nghiệp', desc: 'Nhận $50,000 trong game', price: 50000, icon: 'fa-money-bill-wave' },
+      { id: 2, name: 'Xe Thể Thao', desc: 'Mở khóa 1 siêu xe ngẫu nhiên', price: 150000, icon: 'fa-car' },
+      { id: 3, name: 'Căn Hộ Cao Cấp', desc: 'Sở hữu nhà tại trung tâm', price: 300000, icon: 'fa-building' },
+      { id: 4, name: 'Gói VIP 30 Ngày', desc: 'Tag VIP, x2 lương, /skin', price: 100000, icon: 'fa-crown' }
+    ];
 
-    // Lưu mảng User
-    function saveUsers() {
-      localStorage.setItem('gta_users', JSON.stringify(users));
+    function saveUsers() { localStorage.setItem('vietgangz_users', JSON.stringify(users)); }
+    function saveNews() { localStorage.setItem('vietgangz_news', JSON.stringify(news)); }
+    function getCurrentUser() { return JSON.parse(localStorage.getItem('vietgangz_current_user')); }
+
+    function updateCurrentUser(updatedData) {
+      let user = getCurrentUser();
+      if(user) {
+        const idx = users.findIndex(u => u.id === user.id);
+        if(idx !== -1) { users[idx] = { ...users[idx], ...updatedData }; saveUsers(); }
+        localStorage.setItem('vietgangz_current_user', JSON.stringify({ ...user, ...updatedData }));
+        checkAuthState(); 
+        if(document.getElementById('page-profile').classList.contains('active')) renderProfile();
+      }
     }
 
-    // Kiểm tra trạng thái đăng nhập khi tải trang
+    /* ================= ROUTING ================= */
+    function navigate(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if(target) target.classList.add('active');
+      window.scrollTo(0, 0);
+      
+      if (pageId === 'profile') renderProfile();
+      if (pageId === 'news') renderNews();
+      if (pageId === 'shop') renderShop();
+      if (pageId === 'leaderboard') renderLeaderboard();
+      if (pageId === 'admin') renderAdminPanel();
+    }
+
+    /* ================= XÁC THỰC ================= */
     function checkAuthState() {
-      const currentUser = JSON.parse(localStorage.getItem('gta_current_user'));
+      const currentUser = getCurrentUser();
       const authArea = document.getElementById('auth-area');
 
       if (currentUser) {
-        // Nếu đã đăng nhập -> Đổi giao diện Navbar
         authArea.innerHTML = `
-          <div class="user-profile">
-            <span class="user-name"><i class="fas fa-user-circle"></i> ${currentUser.username}</span>
-            <span class="btn-logout" onclick="handleLogout()">Đăng xuất</span>
+          <div class="user-profile" onclick="navigate('profile')">
+            <div class="user-avatar-nav">${currentUser.avatar || '<i class="fas fa-user-secret"></i>'}</div>
+            <span class="user-name">${currentUser.username}</span>
+            <span class="nav-balance">$${currentUser.money.toLocaleString()}</span>
           </div>
+          ${currentUser.role === 'admin' ? '<button class="btn-nav" style="border-color:#00ff00; color:#00ff00" onclick="navigate(\'admin\')">ADMIN</button>' : ''}
+          <span class="btn-nav" style="border-color:transparent" onclick="handleLogout()">Thoát</span>
         `;
       } else {
-        // Nếu chưa đăng nhập -> Hiện nút Đăng nhập/Đăng ký
         authArea.innerHTML = `
           <button class="btn-nav" onclick="openAuthModal('login')">Đăng nhập</button>
           <button class="btn-nav primary" onclick="openAuthModal('register')">Đăng ký</button>
         `;
       }
     }
+    document.addEventListener("DOMContentLoaded", () => {
+      checkAuthState();
+      // Cập nhật số giờ chơi mỗi phút (Giả lập)
+      setInterval(() => {
+        const user = getCurrentUser();
+        if(user) updateCurrentUser({ hours: (user.hours || 0) + 0.05 });
+      }, 60000);
+    });
 
-    // Gọi hàm kiểm tra ngay khi tải trang
-    document.addEventListener("DOMContentLoaded", checkAuthState);
+    /* ================= RENDER PROFILE ================= */
+    function renderProfile() {
+      const user = getCurrentUser();
+      if (!user) { openAuthModal('login'); navigate('home'); return; }
 
-    /* ==== XỬ LÝ GIAO DIỆN MODAL ==== */
+      document.getElementById('profileName').innerHTML = `${user.avatar || '<i class="fas fa-user-secret"></i>'} ${user.username}`;
+      document.getElementById('profileEmail').innerHTML = `<i class="fas fa-envelope"></i> ${user.email}`;
+      document.getElementById('profileDate').textContent = user.joinDate;
+      
+      let badges = '<div class="badge-vip"><i class="fas fa-star"></i> Thành viên VIP</div>';
+      if (user.role === 'admin') badges += '<div class="admin-badge"><i class="fas fa-shield-alt"></i> Quản Trị Viên</div>';
+      document.getElementById('profileBadges').innerHTML = badges;
+
+      document.getElementById('profileLevel').textContent = user.level;
+      document.getElementById('profileMoney').textContent = '$' + user.money.toLocaleString();
+      document.getElementById('profileHours').textContent = parseFloat(user.hours).toFixed(1);
+    }
+
+    function changeAvatar() {
+      const avatars = ['<i class="fas fa-user-secret"></i>','<i class="fas fa-user-astronaut"></i>','<i class="fas fa-user-ninja"></i>','<i class="fas fa-robot"></i>','<i class="fas fa-ghost"></i>','<i class="fas fa-skull"></i>'];
+      const current = getCurrentUser().avatar || avatars[0];
+      let idx = avatars.indexOf(current);
+      idx = (idx + 1) % avatars.length; 
+      updateCurrentUser({ avatar: avatars[idx] });
+    }
+
+    function openDepositModal() {
+      const amount = prompt("Nhập số tiền bạn muốn nạp (VNĐ - Giả lập):", "50000");
+      if(!amount || isNaN(amount) || amount <= 0) return;
+      const user = getCurrentUser();
+      // Quy đổi 1 VNĐ = 1 $ trong game (cho vui)
+      updateCurrentUser({ money: user.money + parseInt(amount) });
+      alert(`Nạp thành công! Bạn nhận được $${parseInt(amount).toLocaleString()} vào tài khoản.`);
+    }
+
+    /* ================= TIN TỨC ================= */
+    function renderNews() {
+      const list = document.getElementById('news-list');
+      list.innerHTML = news.map(n => `
+        <div class="news-card">
+          <div class="news-date"><i class="far fa-calendar-alt"></i> ${n.date}</div>
+          <div class="news-title">${n.title}</div>
+          <div class="news-content">${n.content}</div>
+        </div>
+      `).join('');
+    }
+
+    /* ================= CỬA HÀNG ================= */
+    function renderShop() {
+      const list = document.getElementById('shop-list');
+      list.innerHTML = shopItems.map(item => `
+        <div class="shop-card">
+          <i class="fas ${item.icon}"></i>
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+          <div class="shop-price">$${item.price.toLocaleString()}</div>
+          <button class="btn-buy" onclick="buyItem(${item.id}, '${item.name}', ${item.price})">Mua Ngay</button>
+        </div>
+      `).join('');
+    }
+
+    function buyItem(id, name, price) {
+      const user = getCurrentUser();
+      if (!user) { openAuthModal('login'); return; }
+      if (user.money < price) { alert('Bạn không đủ tiền! Hãy nạp thêm ở trang Hồ Sơ.'); return; }
+      
+      if(confirm(`Bạn có chắc muốn mua "${name}" với giá $${price.toLocaleString()}?`)) {
+        updateCurrentUser({ money: user.money - price });
+        alert(`Mua thành công! Vật phẩm "${name}" đã được gửi vào nhân vật của bạn.`);
+        renderShop();
+      }
+    }
+
+    /* ================= BẢNG XẾP HẠNG ================= */
+    function renderLeaderboard() {
+      const sorted = [...users].sort((a, b) => b.money - a.money).slice(0, 10);
+      document.getElementById('leader-body').innerHTML = sorted.map((u, i) => `
+        <tr class="${i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : ''}">
+          <td>#${i + 1}</td>
+          <td>${u.avatar || '<i class="fas fa-user-secret"></i>'} ${u.username}</td>
+          <td>Level ${u.level}</td>
+          <td style="color: #00ff00; font-family: 'Orbitron'">$${u.money.toLocaleString()}</td>
+        </tr>
+      `).join('');
+    }
+
+    /* ================= ADMIN ================= */
+    function renderAdminPanel() {
+      const user = getCurrentUser();
+      if(!user || user.role !== 'admin') { navigate('home'); return; }
+      
+      const tbody = document.getElementById('admin-user-list');
+      tbody.innerHTML = users.map(u => `
+        <tr>
+          <td>${u.username} ${u.role==='admin'?'(Admin)':''}</td>
+          <td>${u.email}</td>
+          <td style="color:#00ff00">$${u.money.toLocaleString()}</td>
+          <td>
+            <button class="btn-buy" style="padding:0.3rem 0.8rem; width:auto" onclick="adminAddMoney(${u.id})">+$10k</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function postNews() {
+      const title = document.getElementById('newsTitle').value;
+      const content = document.getElementById('newsContent').value;
+      if(!title || !content) return alert('Vui lòng nhập đủ thông tin!');
+      
+      news.unshift({ id: Date.now(), date: new Date().toLocaleDateString('vi-VN'), title, content });
+      saveNews();
+      document.getElementById('newsTitle').value = '';
+      document.getElementById('newsContent').value = '';
+      alert('Đăng tin thành công!');
+      renderNews();
+    }
+
+    function adminAddMoney(id) {
+      const u = users.find(x => x.id === id);
+      if(u) {
+        u.money += 10000;
+        saveUsers();
+        renderAdminPanel();
+        alert(`Đã cộng $10,000 cho ${u.username}`);
+      }
+    }
+
+    /* ================= MODAL & AUTH ================= */
     const modal = document.getElementById('authModal');
-
-    function openAuthModal(type) {
-      modal.classList.add('active');
-      switchTab(type);
-      hideMessages();
-    }
-
-    function closeAuthModal() {
-      modal.classList.remove('active');
-    }
-
+    function openAuthModal(type) { modal.classList.add('active'); switchTab(type); hideMessages(); }
+    function closeAuthModal() { modal.classList.remove('active'); }
     function switchTab(type) {
       document.getElementById('tab-login').classList.remove('active');
       document.getElementById('tab-register').classList.remove('active');
@@ -426,95 +700,46 @@
       }
       hideMessages();
     }
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeAuthModal(); });
 
-    // Đóng modal khi click ra ngoài vùng đen
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeAuthModal();
-    });
+    function showError(msg) { document.getElementById('msgError').textContent = msg; document.getElementById('msgError').style.display = 'block'; document.getElementById('msgSuccess').style.display = 'none'; }
+    function showSuccess(msg) { document.getElementById('msgSuccess').textContent = msg; document.getElementById('msgSuccess').style.display = 'block'; document.getElementById('msgError').style.display = 'none'; }
+    function hideMessages() { document.getElementById('msgError').style.display = 'none'; document.getElementById('msgSuccess').style.display = 'none'; }
 
-    /* ==== HIỂN THỊ THÔNG BÁO ==== */
-    function showError(msg) {
-      const err = document.getElementById('msgError');
-      err.textContent = msg;
-      err.style.display = 'block';
-      document.getElementById('msgSuccess').style.display = 'none';
-    }
-    function showSuccess(msg) {
-      const suc = document.getElementById('msgSuccess');
-      suc.textContent = msg;
-      suc.style.display = 'block';
-      document.getElementById('msgError').style.display = 'none';
-    }
-    function hideMessages() {
-      document.getElementById('msgError').style.display = 'none';
-      document.getElementById('msgSuccess').style.display = 'none';
-    }
-
-    /* ==== XỬ LÝ ĐĂNG KÝ ==== */
     function handleRegister(e) {
       e.preventDefault();
       const username = document.getElementById('regUser').value.trim();
       const email = document.getElementById('regEmail').value.trim();
       const password = document.getElementById('regPass').value;
 
-      if (password.length < 6) return showError('Mật khẩu phải từ 6 ký tự trở lên!');
-      
-      // Kiểm tra trùng tên
-      if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
-        return showError('Tên tài khoản này đã có người sử dụng!');
-      }
+      if (password.length < 6) return showError('Mật khẩu phải từ 6 ký tự!');
+      if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) return showError('Tên tài khoản đã tồn tại!');
 
-      // Tạo user mới
-      const newUser = {
-        id: Date.now(),
-        username: username,
-        email: email,
-        password: password
-      };
-
-      users.push(newUser);
+      users.push({ id: Date.now(), username, email, password, joinDate: new Date().toLocaleDateString('vi-VN'), level: 1, money: 5000, hours: 0, role: 'user', avatar: '<i class="fas fa-user-secret"></i>' });
       saveUsers();
-
       showSuccess('Đăng ký thành công! Hãy đăng nhập.');
-      
-      // Tự động chuyển sang tab đăng nhập sau 1.5s
-      setTimeout(() => {
-        switchTab('login');
-        document.getElementById('loginUser').value = username; // Điền sẵn tên
-        document.getElementById('form-register').reset();
-      }, 1500);
+      setTimeout(() => { switchTab('login'); document.getElementById('loginUser').value = username; document.getElementById('form-register').reset(); }, 1500);
     }
 
-    /* ==== XỬ LÝ ĐĂNG NHẬP ==== */
     function handleLogin(e) {
       e.preventDefault();
       const username = document.getElementById('loginUser').value.trim();
       const password = document.getElementById('loginPass').value;
 
-      // Tìm user trong DB
       const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
-
       if (user) {
-        // Lưu trạng thái đăng nhập
-        localStorage.setItem('gta_current_user', JSON.stringify(user));
-        showSuccess(`Chào mừng ${user.username} trở lại!`);
-        
-        setTimeout(() => {
-          closeAuthModal();
-          checkAuthState(); // Cập nhật Navbar
-          document.getElementById('form-login').reset();
-          hideMessages();
-        }, 1000);
+        localStorage.setItem('vietgangz_current_user', JSON.stringify(user));
+        showSuccess(`Chào mừng ${user.username}!`);
+        setTimeout(() => { closeAuthModal(); checkAuthState(); navigate('home'); hideMessages(); document.getElementById('form-login').reset(); }, 1000);
       } else {
         showError('Sai tên tài khoản hoặc mật khẩu!');
       }
     }
 
-    /* ==== XỬ LÝ ĐĂNG XUẤT ==== */
     function handleLogout() {
       if(confirm('Bạn có chắc muốn đăng xuất?')) {
-        localStorage.removeItem('gta_current_user');
-        checkAuthState(); // Cập nhật lại Navbar
+        localStorage.removeItem('vietgangz_current_user');
+        checkAuthState(); navigate('home');
       }
     }
   </script>
